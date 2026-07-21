@@ -3,171 +3,183 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>МОЙ ПЛАН</title>
+<title>ТРЕНЕР</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #060608;
-  --card: #0f0f12;
-  --card2: #16161a;
-  --card3: #1a1a20;
-  --border: #1e1e24;
-  --border2: #28282f;
-  --text: #eeeef2;
-  --muted: #5a5a6e;
-  --muted2: #2e2e3a;
+  --bg: #111114;
+  --card: #17171b;
+  --card2: #1d1d22;
+  --card3: #232329;
+  --border: #26262e;
+  --border2: #313139;
+  --text: #f4f4f8;
+  --muted: #83839a;
+  --muted2: #4a4a58;
+  --dim: #b4b4c6;
   --mon: #e63946;
-  --wed: #457b9d;
-  --fri: #2a9d8f;
-  --sat: #e9c46a;
-  --rest: #8b8ba0;
-  --green: #2a9d8f;
-  --gold: #e9c46a;
+  --wed: #457bd1;
+  --fri: #2fbf8f;
+  --sat: #e9b93e;
+  --rest: #83839a;
+  --drop: #e63946;
+  --pause: #e9822e;
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden}
-.screen{display:none;min-height:100vh;padding-bottom:90px}
-.screen.active{display:block;animation:fadeIn .25s ease}
+button,input,textarea,select{font-family:inherit;color:inherit}
+.screen{display:none;min-height:100vh;padding-bottom:88px}
+.screen.active{display:block;animation:fadeIn .2s ease}
 @keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
 
 /* NAV */
-.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(6,6,8,.97);backdrop-filter:blur(20px);border-top:1px solid var(--border);display:flex;z-index:100;padding-bottom:env(safe-area-inset-bottom)}
-.nav-btn{flex:1;padding:12px 4px 10px;border:none;background:transparent;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;font-family:'DM Sans',sans-serif;transition:opacity .2s}
-.nav-btn .nav-icon{font-size:20px}
-.nav-btn .nav-label{font-size:9px;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;font-weight:600}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(17,17,20,.97);backdrop-filter:blur(20px);border-top:1px solid var(--border);display:flex;z-index:200;padding-bottom:env(safe-area-inset-bottom)}
+.nav-btn{flex:1;padding:11px 4px 9px;border:none;background:transparent;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px}
+.nav-btn .nav-icon{font-size:19px;opacity:.5}
+.nav-btn.active .nav-icon{opacity:1}
+.nav-btn .nav-label{font-size:9px;letter-spacing:1px;color:var(--muted);text-transform:uppercase;font-weight:700}
 .nav-btn.active .nav-label{color:var(--text)}
 
 /* HEADER */
-.page-header{padding:52px 20px 16px;background:linear-gradient(180deg,#0a0a0e 0%,var(--bg) 100%);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:50}
-.page-header h1{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:3px}
-.page-header p{font-size:11px;color:var(--muted);margin-top:2px;letter-spacing:.5px}
+.page-header{padding:46px 18px 12px;background:linear-gradient(180deg,#141417 0%,var(--bg) 100%);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:50;display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.page-header h1{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:3px}
+.page-header p{font-size:10.5px;color:var(--muted);margin-top:2px;letter-spacing:.4px}
+.unit-toggle{display:flex;background:var(--card2);border-radius:9px;padding:3px;border:1px solid var(--border2);flex-shrink:0;margin-top:2px}
+.unit-opt{padding:6px 11px;border-radius:6px;font-size:11px;font-weight:700;color:var(--muted);cursor:pointer}
+.unit-opt.active{background:var(--text);color:#111}
 
-/* TABS */
-.day-tabs{display:flex;overflow-x:auto;background:var(--bg);border-bottom:1px solid var(--border);scrollbar-width:none;position:sticky;top:85px;z-index:49}
+/* DAY TABS */
+.day-tabs{display:flex;overflow-x:auto;background:var(--bg);border-bottom:1px solid var(--border);scrollbar-width:none;position:sticky;top:79px;z-index:49}
 .day-tabs::-webkit-scrollbar{display:none}
-.day-tab{flex-shrink:0;padding:10px 14px;border:none;background:transparent;cursor:pointer;border-bottom:2px solid transparent;font-family:'DM Sans',sans-serif;transition:all .2s}
-.day-tab .tab-day{font-size:13px;font-weight:700;letter-spacing:1px;color:var(--muted)}
-.day-tab .tab-type{font-size:8px;color:var(--muted2);margin-top:2px;letter-spacing:1.5px;text-transform:uppercase}
+.day-tab{flex-shrink:0;padding:9px 12px;border:none;background:transparent;cursor:pointer;border-bottom:2px solid transparent}
+.day-tab .tab-day{font-size:12.5px;font-weight:700;letter-spacing:1px;color:var(--muted)}
+.day-tab .tab-type{font-size:8px;color:var(--muted2);margin-top:2px;letter-spacing:1.2px;text-transform:uppercase}
 .day-tab.active .tab-day{color:var(--text)}
 .day-tab.active .tab-type{color:var(--muted)}
 
-.content{padding:14px 16px}
+.content{padding:12px 14px}
+.section-title{font-size:9px;letter-spacing:3px;color:var(--muted2);text-transform:uppercase;margin:16px 0 8px;font-weight:700}
 
-/* PRIORITY */
-.priority-bar{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:12px 16px;margin-bottom:12px;display:flex;gap:6px;flex-wrap:wrap;align-items:center}
-.priority-label{font-size:9px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-right:4px}
-.priority-tag{font-size:10px;font-weight:600;letter-spacing:.5px;padding:3px 10px;border-radius:20px}
-
-/* BANNER */
-.day-banner{border-radius:16px;padding:16px 18px;margin-bottom:12px;border-left:3px solid;position:relative;overflow:hidden}
-.day-banner::before{content:'';position:absolute;top:-30px;right:-30px;width:120px;height:120px;border-radius:50%;opacity:.05;background:currentColor}
+.day-banner{border-radius:14px;padding:14px 16px;margin-bottom:10px;border-left:3px solid}
 .day-banner h2{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:2px}
-.day-banner .b-mode{font-size:11px;color:var(--muted);margin-top:4px;line-height:1.6}
-.day-banner .b-tip{margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,.06);font-size:11px;color:var(--muted);line-height:1.6}
+.day-banner .b-mode{font-size:10.5px;color:var(--muted);margin-top:4px;line-height:1.6}
 
-.section-title{font-size:9px;letter-spacing:3px;color:var(--muted2);text-transform:uppercase;margin:16px 0 8px;font-weight:600;display:flex;align-items:center;justify-content:space-between}
-
-/* WARMUP */
-.warmup-card{background:var(--card2);border-radius:12px;padding:12px 14px;margin-bottom:10px;border:1px solid var(--border)}
-.wu-label{font-size:9px;letter-spacing:2px;color:var(--muted2);text-transform:uppercase;margin-bottom:7px;font-weight:600}
-.wu-row{font-size:12px;color:var(--muted);line-height:1.8;padding-left:10px;border-left:2px solid var(--border);margin-top:4px}
-
-/* EXERCISE CARD */
-.ex-card{background:var(--card);border-radius:14px;margin-bottom:8px;overflow:hidden;border:1px solid var(--border);transition:border-color .2s}
-.ex-card.open{border-color:rgba(255,255,255,.12)}
-.ex-header{padding:12px 14px;display:flex;align-items:center;gap:10px;cursor:pointer}
-.ex-num{width:28px;height:28px;border-radius:8px;background:var(--card2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--muted);flex-shrink:0;transition:all .2s}
+/* COMPACT EXERCISE CARD */
+.ex-card{background:var(--card);border-radius:13px;margin-bottom:7px;overflow:hidden;border:1px solid var(--border)}
+.ex-card.open{border-color:var(--border2)}
+.ex-header{padding:11px 13px;display:flex;align-items:center;gap:10px;cursor:pointer}
+.ex-num{width:24px;height:24px;border-radius:7px;background:var(--card2);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--muted);flex-shrink:0}
 .ex-info{flex:1;min-width:0}
 .ex-name{font-size:13px;font-weight:600;line-height:1.3}
-.ex-meta{font-size:11px;color:var(--muted);margin-top:2px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-.ex-meta b{color:#bbbbc8;font-weight:600}
-.ex-chevron{font-size:13px;color:var(--muted2);flex-shrink:0;transition:transform .25s}
+.ex-weight{font-size:11.5px;color:var(--muted);margin-top:1px}
+.ex-weight b{color:var(--dim);font-weight:700}
+.ex-chevron{font-size:12px;color:var(--muted2);flex-shrink:0;transition:transform .2s}
 .ex-card.open .ex-chevron{transform:rotate(180deg)}
-.ex-body{display:none;padding:0 14px 14px;border-top:1px solid var(--border)}
-.ex-card.open .ex-body{display:block;animation:slideDown .2s ease}
-@keyframes slideDown{from{opacity:0}to{opacity:1}}
+.ex-body{display:none;padding:0 13px 13px;border-top:1px solid var(--border)}
+.ex-card.open .ex-body{display:block;animation:fadeIn .2s ease}
+.tag{display:inline-block;font-size:8.5px;font-weight:700;letter-spacing:.6px;padding:2px 7px;border-radius:20px;text-transform:uppercase;margin-left:5px;vertical-align:middle}
 
-.info-block{background:var(--card2);border-radius:10px;padding:11px 13px;margin-top:10px}
-.info-block-title{font-size:9px;letter-spacing:2px;color:var(--muted2);text-transform:uppercase;margin-bottom:7px;font-weight:600}
-.info-block p{font-size:12px;color:#bbbbc8;line-height:1.75}
+.info-block{background:var(--card2);border-radius:10px;padding:10px 12px;margin-top:9px}
+.info-block-title{font-size:8.5px;letter-spacing:2px;color:var(--muted2);text-transform:uppercase;margin-bottom:6px;font-weight:700}
+.info-block p{font-size:12px;color:var(--dim);line-height:1.7}
 
 .muscle-row{display:flex;align-items:center;gap:8px;margin-top:5px}
-.muscle-name{font-size:11px;color:var(--muted);min-width:130px}
+.muscle-row:first-child{margin-top:0}
+.muscle-name{font-size:10.5px;color:var(--muted);min-width:118px}
 .muscle-track{flex:1;height:3px;background:var(--border);border-radius:2px}
-.muscle-fill{height:3px;border-radius:2px;transition:width .3s ease}
-.muscle-pct{font-size:10px;color:var(--muted2);min-width:28px;text-align:right}
+.muscle-fill{height:3px;border-radius:2px}
+.muscle-pct{font-size:9.5px;color:var(--muted2);min-width:26px;text-align:right}
 
-.tag{display:inline-block;font-size:9px;font-weight:700;letter-spacing:1px;padding:2px 8px;border-radius:20px;text-transform:uppercase;margin-left:5px;vertical-align:middle}
+/* DROP-SET / REST-PAUSE blocks */
+.drop-block{background:rgba(230,57,70,.1);border:1px solid rgba(230,57,70,.3);border-radius:10px;padding:10px 12px;margin-top:9px}
+.drop-block .db-title{font-size:8.5px;letter-spacing:2px;color:var(--drop);text-transform:uppercase;font-weight:700;margin-bottom:5px}
+.drop-block p{font-size:12px;color:#ffb3b8;line-height:1.65}
+.pause-block{background:rgba(233,130,46,.1);border:1px solid rgba(233,130,46,.3);border-radius:10px;padding:10px 12px;margin-top:9px}
+.pause-block .pb-title{font-size:8.5px;letter-spacing:2px;color:var(--pause);text-transform:uppercase;font-weight:700;margin-bottom:5px}
+.pause-block p{font-size:12px;color:#ffcfa3;line-height:1.65}
 
 /* VARIANT SWITCHER */
-.variant-switcher{margin-top:10px}
-.variant-switcher-label{font-size:9px;letter-spacing:2px;color:var(--muted2);text-transform:uppercase;margin-bottom:8px;font-weight:600;display:flex;align-items:center;gap:6px}
-.variant-switcher-label .vs-icon{font-size:11px}
+.variant-switcher{margin-top:9px}
+.variant-label{font-size:8.5px;letter-spacing:2px;color:var(--muted2);text-transform:uppercase;margin-bottom:7px;font-weight:700}
 .variant-pills{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
 .variant-pills::-webkit-scrollbar{display:none}
-.variant-pill{flex-shrink:0;padding:7px 12px;border-radius:10px;background:var(--card2);border:1px solid var(--border2);font-size:11px;font-weight:600;color:var(--muted);cursor:pointer;transition:all .2s;white-space:nowrap}
-.variant-pill.active{color:#000;border-color:transparent}
-.variant-detail{background:var(--card3);border-radius:12px;padding:13px 14px;margin-top:8px;border:1px solid var(--border2);animation:fadeIn .2s ease}
-.variant-weight-row{display:flex;align-items:baseline;gap:8px;margin-bottom:8px}
-.variant-weight{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:1px}
-.variant-weight-unit{font-size:11px;color:var(--muted)}
-.variant-reps{font-size:11px;color:var(--muted);background:var(--card2);padding:3px 9px;border-radius:8px;margin-left:auto}
-.variant-note{font-size:11.5px;color:#bbbbc8;line-height:1.7}
-.variant-calc{font-size:10.5px;color:var(--muted2);margin-top:8px;padding-top:8px;border-top:1px solid var(--border);line-height:1.6;font-style:italic}
+.variant-pill{flex-shrink:0;padding:6px 11px;border-radius:9px;background:var(--card2);border:1px solid var(--border2);font-size:10.5px;font-weight:600;color:var(--muted);cursor:pointer;white-space:nowrap}
+.variant-pill.active{color:#111;border-color:transparent}
+.variant-detail{background:var(--card3);border-radius:10px;padding:11px 12px;margin-top:8px;border:1px solid var(--border2)}
+.variant-weight{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:1px}
+.variant-note{font-size:11px;color:var(--dim);line-height:1.65;margin-top:5px}
 
-.var-block{background:var(--card2);border-radius:10px;padding:11px 13px;margin-top:10px}
-.var-row{font-size:11px;color:var(--muted);line-height:1.8;padding-left:10px;border-left:2px solid var(--border);margin-top:4px}
+/* TIMER BUTTON */
+.timer-btn{width:100%;margin-top:9px;background:var(--card2);border:1px solid var(--border2);border-radius:10px;padding:11px;font-size:12px;font-weight:700;color:var(--text);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px}
+.timer-btn .ti{font-size:14px}
 
-.alt-text{font-size:11px;color:var(--muted2);margin-top:10px}
-.alt-text span{color:var(--muted)}
+/* NOTES */
+.notes-wrap{margin-top:9px}
+.notes-input{width:100%;background:var(--card2);border:1px solid var(--border2);border-radius:10px;padding:10px 11px;font-size:12px;color:var(--text);resize:none;min-height:44px}
+.notes-input::placeholder{color:var(--muted2)}
+.notes-saved{font-size:9.5px;color:var(--muted2);margin-top:4px;height:12px}
 
-/* REST */
-.rest-hero{background:var(--card);border-radius:16px;padding:26px 18px;text-align:center;margin-bottom:12px;border:1px solid var(--border)}
-.rest-hero .r-icon{font-size:42px;margin-bottom:10px}
-.rest-hero h3{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:2px;color:var(--muted)}
-.rest-hero p{font-size:12px;color:var(--muted2);margin-top:6px;line-height:1.7}
-.tip-card{background:var(--card);border-radius:12px;padding:14px 15px;margin-bottom:8px;border-left:3px solid}
-.tip-card h4{font-size:12px;font-weight:600;margin-bottom:5px}
-.tip-card p{font-size:12px;color:var(--muted);line-height:1.65}
-.checklist{list-style:none;margin-top:8px}
-.checklist li{font-size:12px;color:var(--muted);line-height:1.8;padding-left:18px;position:relative}
-.checklist li::before{content:'✓';position:absolute;left:0;color:#2a9d8f;font-weight:700}
-.nutrition-box{background:var(--card2);border-radius:12px;padding:14px 15px;margin-top:10px;border:1px solid var(--border)}
-.nutrition-box .nut-title{font-size:9px;letter-spacing:2px;color:var(--muted2);text-transform:uppercase;margin-bottom:8px;font-weight:600}
+/* SUPERSET BRACKET */
+.combo-wrap{border:1.5px solid;border-radius:15px;padding:12px 10px 10px;margin-bottom:9px;position:relative}
+.combo-label{display:inline-flex;align-items:center;gap:5px;font-size:9.5px;font-weight:800;letter-spacing:1.5px;padding:4px 11px;border-radius:20px;margin-bottom:8px}
+.combo-meta{font-size:10.5px;color:var(--muted);margin-bottom:9px;line-height:1.6}
+.combo-item{background:var(--card);border-radius:12px;border:1px solid var(--border);margin-bottom:0}
+.combo-arrow{text-align:center;font-size:14px;color:var(--muted2);padding:2px 0}
+.combo-final{margin-top:9px}
+
+/* REST HERO / TIPS (rest days) */
+.rest-hero{background:var(--card);border-radius:15px;padding:22px 16px;text-align:center;margin-bottom:10px;border:1px solid var(--border)}
+.rest-hero .r-icon{font-size:36px;margin-bottom:8px}
+.rest-hero h3{font-family:'Bebas Neue',sans-serif;font-size:21px;letter-spacing:2px;color:var(--dim)}
+.rest-hero p{font-size:11.5px;color:var(--muted2);margin-top:5px;line-height:1.6}
+.tip-card{background:var(--card);border-radius:12px;padding:13px 14px;margin-bottom:7px;border-left:3px solid}
+.tip-card h4{font-size:11.5px;font-weight:700;margin-bottom:4px}
+.tip-card p{font-size:11.5px;color:var(--muted);line-height:1.6}
+.nutrition-box{background:var(--card2);border-radius:12px;padding:13px 14px;margin-top:9px;border:1px solid var(--border)}
+.nutrition-box .nut-title{font-size:8.5px;letter-spacing:2px;color:var(--muted2);text-transform:uppercase;margin-bottom:7px;font-weight:700}
 .nut-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
-.nut-item{background:var(--card);border-radius:8px;padding:8px 10px;border:1px solid var(--border)}
-.nut-val{font-size:15px;font-weight:700;font-family:'Bebas Neue',sans-serif;letter-spacing:1px}
-.nut-label{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-top:1px}
+.nut-item{background:var(--card);border-radius:8px;padding:8px 9px;border:1px solid var(--border)}
+.nut-val{font-size:14px;font-weight:700;font-family:'Bebas Neue',sans-serif;letter-spacing:1px}
+.nut-label{font-size:8.5px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-top:1px}
 
-/* HOME ABS TOGGLE CARD */
-.home-abs-card{background:linear-gradient(135deg,var(--card2) 0%,var(--card) 100%);border-radius:14px;padding:14px 15px;margin-top:10px;border:1px solid var(--border2);cursor:pointer}
-.home-abs-head{display:flex;align-items:center;gap:10px}
-.home-abs-head .icon{font-size:20px}
-.home-abs-head .title{font-size:12.5px;font-weight:700}
-.home-abs-head .sub{font-size:10px;color:var(--muted);margin-top:1px}
-.home-abs-head .chev{margin-left:auto;color:var(--muted2);transition:transform .25s;font-size:12px}
+.home-abs-card{background:linear-gradient(135deg,var(--card2) 0%,var(--card) 100%);border-radius:13px;padding:13px 14px;margin-top:9px;border:1px solid var(--border2);cursor:pointer}
+.home-abs-head{display:flex;align-items:center;gap:9px}
+.home-abs-head .icon{font-size:19px}
+.home-abs-head .title{font-size:12px;font-weight:700}
+.home-abs-head .sub{font-size:9.5px;color:var(--muted);margin-top:1px}
+.home-abs-head .chev{margin-left:auto;color:var(--muted2);transition:transform .2s;font-size:11px}
 .home-abs-card.open .chev{transform:rotate(180deg)}
-.home-abs-body{display:none;margin-top:12px;padding-top:12px;border-top:1px solid var(--border)}
+.home-abs-body{display:none;margin-top:11px;padding-top:11px;border-top:1px solid var(--border)}
 .home-abs-card.open .home-abs-body{display:block;animation:fadeIn .2s ease}
-.abs-ex-row{background:var(--card3);border-radius:10px;padding:10px 12px;margin-bottom:7px}
-.abs-ex-row .aname{font-size:12px;font-weight:600}
-.abs-ex-row .ameta{font-size:10.5px;color:var(--muted);margin-top:3px}
-.abs-ex-row .ahow{font-size:11px;color:#bbbbc8;margin-top:5px;line-height:1.6}
+.abs-ex-row{background:var(--card3);border-radius:10px;padding:9px 11px;margin-bottom:6px}
+.abs-ex-row .aname{font-size:11.5px;font-weight:600}
+.abs-ex-row .ameta{font-size:10px;color:var(--muted);margin-top:2px}
+.abs-ex-row .ahow{font-size:10.5px;color:var(--dim);margin-top:4px;line-height:1.55}
 
-/* RULES */
-.rule-card{background:var(--card);border-radius:14px;padding:15px;margin-bottom:9px;border:1px solid var(--border)}
-.rule-card h4{font-size:13px;font-weight:600;margin-bottom:7px}
-.rule-card p,.rule-card li{font-size:12px;color:var(--muted);line-height:1.75}
+/* RULES SCREEN */
+.rule-card{background:var(--card);border-radius:13px;padding:14px 15px;margin-bottom:8px;border:1px solid var(--border)}
+.rule-card h4{font-size:12.5px;font-weight:700;margin-bottom:6px}
+.rule-card p,.rule-card li{font-size:11.5px;color:var(--dim);line-height:1.7}
 .rule-card ul{padding-left:14px}
+.scale-row{display:flex;align-items:center;gap:9px;background:var(--card2);border-radius:10px;padding:9px 11px;margin-bottom:6px;border-left:3px solid}
+.scale-row .sn{font-family:'Bebas Neue',sans-serif;font-size:19px;width:26px;text-align:center;flex-shrink:0}
+.scale-row .sd b{display:block;font-size:11.5px;color:var(--text);margin-bottom:1px}
+.scale-row .sd span{font-size:11px;color:var(--muted);line-height:1.55}
 
-/* REST TIMER BADGE */
-.rest-badge{display:inline-flex;align-items:center;gap:5px;background:var(--card2);border:1px solid var(--border);border-radius:20px;padding:3px 10px;font-size:10px;color:var(--muted);font-weight:600;margin-top:6px}
-.rest-badge-dot{width:5px;height:5px;border-radius:50%;background:var(--muted)}
+/* FULLSCREEN TIMER */
+.timer-fs{position:fixed;inset:0;background:rgba(10,10,12,.98);backdrop-filter:blur(10px);z-index:500;display:none;flex-direction:column;align-items:center;justify-content:center;gap:22px}
+.timer-fs.show{display:flex;animation:fadeIn .2s ease}
+.timer-fs-label{font-size:11px;letter-spacing:3px;color:var(--muted);text-transform:uppercase;text-align:center;padding:0 30px}
+.timer-fs-ring{width:min(72vw,280px);height:min(72vw,280px);position:relative}
+.timer-fs-ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.timer-fs-val{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:min(15vw,64px);letter-spacing:2px}
+.timer-fs-actions{display:flex;gap:12px}
+.timer-fs-btn{padding:13px 26px;border-radius:12px;border:1px solid var(--border2);background:var(--card2);color:var(--text);font-size:13px;font-weight:700;cursor:pointer}
+.timer-fs-btn.primary{background:var(--text);color:#111;border-color:transparent}
 
-/* PROGRESS HINT */
-.progress-hint{display:flex;align-items:center;gap:6px;background:rgba(42,157,143,.08);border:1px solid rgba(42,157,143,.2);border-radius:10px;padding:8px 11px;margin-top:10px;font-size:11px;color:#7fc4ba;line-height:1.6}
-.progress-hint .pi{font-size:13px;flex-shrink:0}
+.toast{position:fixed;left:50%;top:16px;transform:translateX(-50%);background:var(--card2);border:1px solid var(--border2);border-radius:10px;padding:9px 15px;font-size:12px;color:var(--text);z-index:600;display:none;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.toast.show{display:block;animation:fadeIn .2s ease}
 </style>
 </head>
 <body>
@@ -175,704 +187,719 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
 <!-- WORKOUT SCREEN -->
 <div class="screen active" id="screen-workout">
   <div class="page-header">
-    <h1>МОЙ ПЛАН</h1>
-    <p>82 кг · 183 см · Стаж 3–5 лет · Масса + Рельеф</p>
+    <div>
+      <h1>ТРЕНЕР</h1>
+      <p>82 кг · 183 см · Стаж 3–5 лет · Спина → Грудь → Плечи</p>
+    </div>
+    <div class="unit-toggle">
+      <div class="unit-opt active" id="unit-kg" onclick="setUnits('kg')">КГ</div>
+      <div class="unit-opt" id="unit-lb" onclick="setUnits('lb')">LB</div>
+    </div>
   </div>
-  <div class="day-tabs" id="dayTabs">
-    <button class="day-tab active" onclick="showDay('mon')" id="tab-mon">
-      <div class="tab-day" style="color:var(--mon)">ПН</div>
-      <div class="tab-type">Сила</div>
-    </button>
-    <button class="day-tab" onclick="showDay('tue')" id="tab-tue">
-      <div class="tab-day">ВТ</div>
-      <div class="tab-type">Отдых</div>
-    </button>
-    <button class="day-tab" onclick="showDay('wed')" id="tab-wed">
-      <div class="tab-day" style="color:var(--wed)">СР</div>
-      <div class="tab-type">Объём</div>
-    </button>
-    <button class="day-tab" onclick="showDay('thu')" id="tab-thu">
-      <div class="tab-day">ЧТ</div>
-      <div class="tab-type">Отдых</div>
-    </button>
-    <button class="day-tab" onclick="showDay('fri')" id="tab-fri">
-      <div class="tab-day" style="color:var(--fri)">ПТ</div>
-      <div class="tab-type">Ноги+Руки</div>
-    </button>
-    <button class="day-tab" onclick="showDay('sat')" id="tab-sat">
-      <div class="tab-day" style="color:var(--sat)">СБ</div>
-      <div class="tab-type">Бокс+Добив</div>
-    </button>
-    <button class="day-tab" onclick="showDay('sun')" id="tab-sun">
-      <div class="tab-day">ВС</div>
-      <div class="tab-type">Отдых</div>
-    </button>
-  </div>
+  <div class="day-tabs" id="dayTabs"></div>
   <div class="content" id="dayContent"></div>
 </div>
 
 <!-- RULES SCREEN -->
 <div class="screen" id="screen-rules">
   <div class="page-header">
-    <h1>ПРАВИЛА</h1>
-    <p>Принципы которые дают результат</p>
+    <div><h1>ПРАВИЛА</h1><p>RIR, приёмы интенсивности, прогрессия</p></div>
   </div>
-  <div class="content">
-    <div class="section-title">Прогрессия</div>
-    <div class="rule-card">
-      <h4>📈 Как прогрессировать</h4>
-      <ul>
-        <li>База (ПН): +2.5–5 кг когда выполнил все повторы чисто на всех рабочих подходах</li>
-        <li>Объём (СР): +1 повтор каждую неделю, потом поднимаешь вес</li>
-        <li>Подтягивания с весом: +2.5 кг раз в 1–2 недели</li>
-        <li>2 недели нет прогресса → убираешь объём (1 подход), не добавляешь вес</li>
-        <li>Записывай веса каждую тренировку — без этого прогресс невидим</li>
-      </ul>
-    </div>
-    <div class="rule-card">
-      <h4>🎯 RIR — запас повторений</h4>
-      <p><b style="color:var(--text)">RIR 1–2</b> = стоп за 1–2 повтора до отказа. На базе всегда.<br>
-      <b style="color:var(--text)">RIR 0</b> = отказ — только изоляция, только последний подход.<br>
-      Отказ в базе снижает качество следующих сетов и травмоопасен.</p>
-    </div>
-    <div class="section-title">Техника</div>
-    <div class="rule-card">
-      <h4>⏱ Темп — негатив решает</h4>
-      <p>Эксцентрика (опускание) даёт 40% больше стимула роста. Никогда не бросай вес вниз. Негатив 2–3 сек = двойная нагрузка на мышцу при том же весе.</p>
-    </div>
-    <div class="rule-card">
-      <h4>🧠 Связь мозг–мышца</h4>
-      <p>Осознанное сокращение целевой мышцы увеличивает её активацию на 20–30%. В подтягиваниях — думай о широчайших или верхе спины (зависит от варианта хвата), не о руках. В curl — чувствуй бицепс, не тяни кистью.</p>
-    </div>
-    <div class="rule-card">
-      <h4>⏸ Отдых между подходами</h4>
-      <ul>
-        <li>База (подтягивания, тяга, жим): 2–3 мин — не меньше</li>
-        <li>Изоляция (curl, махи, трицепс): 60–90 сек</li>
-        <li>Лёгкий день (суббота): 60–90 сек</li>
-      </ul>
-    </div>
-    <div class="rule-card">
-      <h4>⚡ Разминка — обязательно</h4>
-      <ul>
-        <li>5–7 мин суставная разминка</li>
-        <li>50% рабочего × 8–10 повт</li>
-        <li>70% рабочего × 4–6 повт</li>
-        <li>Рабочие подходы</li>
-      </ul>
-    </div>
-    <div class="section-title">Восстановление</div>
-    <div class="rule-card">
-      <h4>😴 Сон = рост</h4>
-      <p>80% роста мышц происходит во сне. 7–9 часов — не рекомендация, физиология. Пик гормона роста в первые 2 часа глубокого сна. Лёг в 23:00 — пик в 1:00.</p>
-    </div>
-    <div class="rule-card">
-      <h4>📅 Держи план 8 недель</h4>
-      <p>Тело адаптируется к паттерну 3–4 недели. Смена упражнений раньше = ты не успел прогрессировать в них. Минимум 6–8 недель без глобальных изменений.</p>
-    </div>
-    <div class="section-title">Пресс — гибкий график</div>
-    <div class="rule-card">
-      <h4>🏠 Только дома, в свободный день отдыха</h4>
-      <p>Пресс убран из зала полностью — не хватает времени, и 3 движения с резинкой дома полностью покрывают верх, низ и косые. Делай в любой день когда не идёшь в зал (вторник, четверг, воскресенье — без привязки к конкретному дню, смотри по своему расписанию). Карточка "Пресс дома" есть в каждом дне отдыха.</p>
-    </div>
-    <div class="section-title">О прессе и рельефе</div>
-    <div class="rule-card">
-      <h4>💪 Пресс строится — рельеф открывается питанием</h4>
-      <p>Сейчас профицит → пресс будет плотным и объёмным. Кубики появятся когда захочешь подсушиться (~200 ккал дефицит). Белок 160–180 г/день обязательно.</p>
-    </div>
-    <div class="section-title">Питание</div>
-    <div class="rule-card">
-      <h4>🍽 Цифры</h4>
-      <p><b style="color:var(--text)">Тренировочные дни:</b> 3000–3100 ккал · 180 г белка · 400 г углеводов · 70 г жиров<br><br>
-      <b style="color:var(--text)">Дни отдыха:</b> 2800 ккал · 180 г белка · 350 г углеводов · 70 г жиров</p>
-    </div>
-  </div>
+  <div class="content" id="rulesContent"></div>
 </div>
 
 <!-- NAV -->
 <div class="bottom-nav">
   <button class="nav-btn active" onclick="showScreen('workout')" id="nav-workout">
-    <span class="nav-icon">💪</span>
-    <span class="nav-label">План</span>
+    <span class="nav-icon">💪</span><span class="nav-label">План</span>
   </button>
   <button class="nav-btn" onclick="showScreen('rules')" id="nav-rules">
-    <span class="nav-icon">📋</span>
-    <span class="nav-label">Правила</span>
+    <span class="nav-icon">📋</span><span class="nav-label">Правила</span>
   </button>
 </div>
 
+<!-- FULLSCREEN REST TIMER -->
+<div class="timer-fs" id="timerFs">
+  <div class="timer-fs-label" id="timerFsLabel">ОТДЫХ</div>
+  <div class="timer-fs-ring">
+    <svg viewBox="0 0 200 200">
+      <circle cx="100" cy="100" r="88" fill="none" stroke="#26262e" stroke-width="10"/>
+      <circle id="timerFsCircle" cx="100" cy="100" r="88" fill="none" stroke="#2fbf8f" stroke-width="10" stroke-linecap="round" stroke-dasharray="552.9" stroke-dashoffset="0"/>
+    </svg>
+    <div class="timer-fs-val" id="timerFsVal">1:30</div>
+  </div>
+  <div class="timer-fs-actions">
+    <button class="timer-fs-btn" onclick="addTimerTime(15)">+15 сек</button>
+    <button class="timer-fs-btn primary" onclick="closeTimerFs()">Готово</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
 <script>
+/* =========================================================================
+   ТРЕНЕР v3 — программа строго по ТЗ пользователя
+   ========================================================================= */
+
+const STATE = { units: 'kg' };
+const KG_TO_LB = 2.20462;
+
+function weightLabel(weight, unitStr) {
+  if (weight == null) return unitStr || '';
+  const suffix = (unitStr || '').replace(/^кг/, '');
+  const unitLabel = STATE.units === 'lb' ? 'lb' : 'кг';
+  const val = STATE.units === 'lb' ? Math.round(weight * KG_TO_LB) : weight;
+  return `${val} ${unitLabel}${suffix}`;
+}
+function weightRangeLabel(lo, hi, unitStr) {
+  const suffix = (unitStr || '').replace(/^кг/, '');
+  const unitLabel = STATE.units === 'lb' ? 'lb' : 'кг';
+  const loV = STATE.units === 'lb' ? Math.round(lo * KG_TO_LB) : lo;
+  const hiV = STATE.units === 'lb' ? Math.round(hi * KG_TO_LB) : hi;
+  return `${loV}–${hiV} ${unitLabel}${suffix}`;
+}
+
+/* ---------------------------------------------------------------------- */
+/* HOME ABS (гибкий блок, дни отдыха)                                      */
+/* ---------------------------------------------------------------------- */
+
 const HOME_ABS = {
   title: '🏠 Пресс дома',
-  sub: 'Резинка + турник · в любой день отдыха · 3 упражнения',
+  sub: 'Резинка + турник · 3 упражнения',
   exercises: [
-    {
-      name: 'Скручивания лёжа с резинкой (упор на квадрицепсы)',
-      sets: '4 × 10', muscles: 'Верх пресса',
-      how: 'Ложишься, плотная резинка упирается в квадрицепсы (натяжение), руки держат резинку у груди или за головой. Скручиваешься вверх против сопротивления резинки. Пауза 1 сек в верхней точке. Медленно вниз.'
-    },
-    {
-      name: 'Боковые скручивания с резинкой',
-      sets: '4 × 10 (на сторону)', muscles: 'Косые мышцы живота',
-      how: 'Та же резинка, скручивание в сторону против сопротивления. Чувствуешь косые — не поясницу. Медленный контроль в обе стороны.'
-    },
-    {
-      name: 'Подъём ног/коленей в висе на турнике',
-      sets: '4 × 10', muscles: 'Нижний пресс + сгибатели бедра',
-      how: 'Вис на турнике, подъём коленей или прямых ног с подкрутом таза в верхней точке. Без раскачки. Пауза 1 сек. Медленно вниз.'
-    }
+    { name: 'Скручивания с резинкой', sets: '4 × 10', muscles: 'Верх пресса',
+      how: 'Резинка упирается в квадрицепсы, скручивание вверх против сопротивления, пауза 1 сек.' },
+    { name: 'Боковые скручивания с резинкой', sets: '4 × 10 на сторону', muscles: 'Косые',
+      how: 'Скручивание в сторону против сопротивления резинки, медленный контроль.' },
+    { name: 'Подъём ног в висе', sets: '4 × 10', muscles: 'Нижний пресс',
+      how: 'Вис на турнике, подъём ног с подкрутом таза вверху, без раскачки.' }
   ]
 };
 
+/* ---------------------------------------------------------------------- */
+/* PROGRAM                                                                 */
+/* ---------------------------------------------------------------------- */
+
 const DAYS = {
 
-  // ─── ПОНЕДЕЛЬНИК ───────────────────────────────────────────────
   mon: {
-    color: '#e63946',
-    title: 'ПОНЕДЕЛЬНИК — UPPER СИЛА',
-    mode: '6–8 повт на базе · RIR 1–2 · отдых 2–3 мин',
-    tip: 'Главный день недели. Максимальный вес при чистой технике. Негатив 2–3 сек на каждом движении. Между тяжёлыми сетами — полные 2–3 мин, не меньше.',
-    time: '75–90 мин',
-    priority: [['СПИНА','#e63946'],['ПЛЕЧИ','#e63946'],['ГРУДЬ','#5a5a6e']],
-    warmup: [
-      '5–7 мин: вращения в плечах, лопатках, шее',
-      'Перед подтягиваниями: 5–6 раз без веса',
-      'Перед жимом/тягой: 50% × 8 повт → 70% × 5 повт → рабочий'
-    ],
+    color: '#e63946', title: 'ПОНЕДЕЛЬНИК — СИЛА', tabType: 'Сила',
+    mode: 'Чередование спина/грудь/спина/грудь · отдых 2–3 мин',
     exercises: [
       {
-        name: 'Подтягивания с весом',
-        sets: '5 рабочих × 6', weight: '20 кг (пояс)', rest: '2.5–3 мин', tag: '★ ГЛАВНОЕ',
-        muscles: [['Широчайшие',55],['Верх спины',30],['Бицепс / трапеция',15]],
-        how: 'Все 5 подходов с весом 20 кг на поясе, по 6 повторов. Подходы 1–2: локти идут вперёд и вниз, тянешь грудью к перекладине — акцент на широчайшие. Подходы 3–4: хват чуть шире, локти уходят в стороны — акцент смещается на верх спины. Подход 5 (добивочный): короткий хват — акцент трапеция/верх спины, делаешь до полного отказа. Негатив строго 3 сек на каждом подходе — это половина упражнения.',
-        tempo: 'Взрывно вверх → пауза 1 сек → вниз 3 сек',
-        why: 'Один из немногих упражнений где можно менять акцент внутри одного движения — просто меняя хват и положение локтей. 5 подходов = большой объём на всю спину за раз.',
-        variants: {
-          label: 'Хват / акцент',
-          icon: '🖐️',
-          options: [
-            {
-              id: 'wide_lat', name: 'Подх. 1–2: Широчайшие',
-              weight: 20, unit: 'кг', reps: '6 повт',
-              note: 'Хват на ширине плеч или чуть шире. Локти идут вперёд и вниз во время тяги. Тянешь ГРУДЬ к перекладине, не подбородок. Пауза 1 сек когда грудь коснулась.',
-              calc: 'Базовый рабочий вес — без пересчёта.'
-            },
-            {
-              id: 'wide_upper', name: 'Подх. 3–4: Верх спины',
-              weight: 20, unit: 'кг', reps: '6 повт',
-              note: 'Хват чуть шире, локти уходят в стороны при тяге (не строго вниз). Это смещает нагрузку на широчайшие/верх спины и ромбовидные мышцы. Тот же вес — но новая зона напряжения.',
-              calc: 'Тот же вес 20 кг — меняется только траектория локтя, не нагрузка.'
-            },
-            {
-              id: 'close_trap', name: 'Подх. 5: Короткий хват (добивка)',
-              weight: 20, unit: 'кг', reps: '6 повт, до отказа',
-              note: 'Узкий/короткий хват. Акцент уходит в трапецию и верх спины. Это финальный добивочный подход — выкладываешься полностью, последние повторы через жжение.',
-              calc: 'Вес тот же — это добивка, не повод снижать нагрузку.'
-            },
-            {
-              id: 'pulldown_sub', name: 'Замена: тяга верхнего блока',
-              weight: 62, unit: 'кг', reps: '6 повт',
-              note: 'Если турник/пояс заняты — тяга верхнего блока широким хватом к груди. Блок даёт более стабильную траекторию, поэтому вес можно держать близко к твоему телу+отягощению.',
-              calc: '82 кг (твой вес) + 20 кг пояс = 102 кг общая нагрузка. На блоке без поддержки корпуса обычно тянут ~60–65% от этой суммы → 62 кг.'
-            }
-          ]
-        },
-        alt: 'Тяга верхнего блока широким хватом к груди (вариант выше)'
+        name: 'Подтягивания с весом', weight: 20, unit: 'кг', sets: '5', reps: '6', rest: 165, tag: '★ ГЛАВНОЕ',
+        muscles: [['Широчайшие', 55], ['Верх спины', 30], ['Трапеция', 15]],
+        how: 'Подх. 1–2: локти вперёд-вниз — акцент широчайшие. Подх. 3–4: локти в стороны — акцент верх спины. Подх. 5: короткий хват до отказа — акцент трапеция.',
+        tempo: 'Вверх взрывно → пауза 1 сек → вниз 3 сек (негатив)',
+        progression: 'Все 5×6 выполнены чисто → +2.5 кг на следующей тренировке.',
+        altVariants: [{ name: 'Тяга верхнего блока', weight: 62, unit: 'кг', note: 'Широкий хват к груди — если турник или пояс заняты.' }]
       },
       {
-        name: 'Тяга штанги в наклоне',
-        sets: '4 × 6–8', weight: '90 кг', rest: '2–3 мин', tag: null,
-        muscles: [['Середина спины',50],['Широчайшие',30],['Задняя дельта',20]],
-        how: 'Наклон 30–45°, спина нейтральна — не горбись. Тянешь гриф к ПУПКУ — не к груди. Локти вдоль корпуса назад. Пауза 1 сек со сведением лопаток — без этого упражнение теряет 50% эффекта. Негатив 2–3 сек.',
-        tempo: 'Вверх контролируемо → пауза 1 сек лопатки → вниз 2–3 сек',
-        why: 'Строит толщину спины. Другой вектор тяги по сравнению с подтягиваниями — вместе дают полное покрытие спины.',
-        variants: {
-          label: 'Тренажёр',
-          icon: '🔁',
-          options: [
-            {
-              id: 'smith', name: 'Смит-машина (пояс)',
-              weight: 90, unit: 'кг', reps: '6–8 повт',
-              note: 'Пояс на штангу Смита под наклоном. Более контролируемая траектория — можно позволить себе медленнее опускать и держать полное растяжение внизу. Хорошо при усталой пояснице.',
-              calc: 'Твой рабочий вес — без пересчёта.'
-            },
-            {
-              id: 'free', name: 'Свободная штанга',
-              weight: 90, unit: 'кг', reps: '6–8 повт',
-              note: 'Классический вариант, наклон 30–45°. Больше стабилизации корпусом, немного сложнее технически, чем в Смите — но более естественная траектория.',
-              calc: 'Тот же рабочий вес — траектория свободнее, но нагрузка не меняется.'
-            }
-          ]
-        },
-        alt: 'Т-гриф / нижний блок тяжёлый сидя'
-      },
-      {
-        name: 'Жим в Хаммер-машине (грудь)',
-        sets: '4 × 6', weight: '60 кг/сторону', rest: '2 мин', tag: null,
-        muscles: [['Грудь',70],['Передняя дельта',20],['Трицепс',10]],
-        how: 'Настраиваешь сиденье: рукоятки на уровне НИЗА груди. Спина прижата к спинке всё время — не отрываешься. Жмёшь до полного разгибания, пауза 0.5 сек. Негатив 2–3 сек — не бросай назад. Грудь чувствуется — не трицепс.',
+        name: 'Хаммер', weight: 60, unit: 'кг/сторону', sets: '4', reps: '6', rest: 120, tag: null,
+        muscles: [['Грудь', 70], ['Передняя дельта', 20], ['Трицепс', 10]],
+        how: 'Спина прижата к спинке весь подход. Жмёшь до почти полного разгибания, пауза 0.5 сек.',
         tempo: 'Вперёд контролируемо → пауза 0.5 сек → назад 2–3 сек',
-        why: 'Замена жима штанги лёжа — спина зафиксирована, грудь изолирована, не нужен страхующий. Ты лучше чувствуешь грудь — упражнение работает на тебя.',
-        variants: {
-          label: 'Тренажёр занят?',
-          icon: '🔁',
-          options: [
-            {
-              id: 'hammer', name: 'Хаммер (основной)',
-              weight: 60, unit: 'кг/сторону', reps: '6 повт',
-              note: 'Фиксированная траектория, спина прижата к спинке. Жмёшь до полного разгибания без блокировки локтя в замок.',
-              calc: 'Суммарно 120 кг на тренажёре (60 кг × 2 стороны) — твой рабочий силовой вес.'
-            },
-            {
-              id: 'dumbbell', name: 'Гантели лёжа (замена)',
-              weight: 34, unit: 'кг/рука', reps: '6 повт',
-              note: 'Без угла, горизонтально. Стабилизацию теперь держат плечи и корпус — поэтому вес ниже, чем в тренажёре. Не бросай гантели в нижней точке, контролируй растяжение.',
-              calc: 'От суммарных 120 кг в Хаммере и твоего же рабочего веса 28кг×10-12 в среду (объём) пересчитано на силовой режим 6 повт: ~32–36 кг/рука → берём 34 кг.'
-            }
-          ]
-        },
-        alt: 'Пек-дек / кроссовер в сведении'
+        progression: '4×6 легко на всех подходах → +5 кг.',
+        altVariants: [{ name: 'Гантели лёжа', weight: 34, unit: 'кг/рука', note: 'Свободный вес, без угла — стабилизацию держат плечи, поэтому вес ниже суммарного в тренажёре.' }]
       },
       {
-        name: 'Брусья с весом (грудной акцент)',
-        sets: '3 × 8', weight: '+20 кг', rest: '2 мин', tag: '★ ЛЮБИМОЕ',
-        muscles: [['Грудь',55],['Трицепс',35],['Передняя дельта',10]],
-        how: 'Корпус наклонён вперёд ~30° — это переносит нагрузку с трицепса на грудь. Локти слегка в стороны. Опускаешься до параллели предплечий с полом. Негатив 2–3 сек.',
-        tempo: 'Вниз 2–3 сек → вверх взрывно',
-        why: '+20 кг на брусьях с наклоном вперёд — мощная нагрузка на грудь. Хорошо добивает грудь после хаммера.',
-        variability: ['Когда 8 повт легко на всех 3 подходах — добавляй +2.5 кг','Последний подход — можно до RIR 0–1'],
-        alt: 'Жим в тренажёре / отжимания с весом'
-      },
-      {
-        name: 'Жим гантелей сидя (плечи)',
-        sets: '2 × 8–10', weight: '22–30 кг/рука', rest: '90 сек–2 мин', tag: null,
-        muscles: [['Передняя дельта',50],['Средняя дельта',35],['Трицепс',15]],
-        how: 'Спина прямая — не прогибаешься в пояснице. Локти чуть впереди корпуса, не строго в стороны. Опускаешь до уровня ушей — не ниже (убережёт плечо). Жмёшь вверх без блокировки локтей. Негатив 2–3 сек.',
-        tempo: 'Вниз 2–3 сек → вверх контролируемо',
-        why: 'После хаммера и брусьев плечи уже разогреты — 2 подхода добивают переднюю/среднюю дельту без лишней потери времени.',
-        variability: ['Нед. 1–3: 22–24 кг, освой технику без прогиба','Нед. 4+: 26–30 кг, +2 кг каждые 2 недели'],
-        alt: 'Жим в тренажёре сидя'
-      }
-    ]
-  },
-
-  // ─── ВТОРНИК ───────────────────────────────────────────────────
-  tue: {
-    rest: true, restType: 'full',
-    title: 'ВТОРНИК — ПОЛНЫЙ ОТДЫХ',
-    color: '#3a3a4a',
-    subtitle: 'Мышцы растут сейчас — не на тренировке',
-    checklist: [
-      'Пить 2.5–3 л воды',
-      'Белок 180 г — особенно важен сегодня',
-      'Сон 7–9 часов (пик ГР в первые 2 часа)',
-      'Лёгкая растяжка груди и дельт — 10 мин',
-      'Ходьба 20–30 мин — ускоряет вывод лактата'
-    ],
-    nutrition: {kcal:'2800', protein:'180 г', carbs:'350 г', fat:'70 г'},
-    homeAbs: true,
-    tips: [
-      {color:'#e63946', title:'🔋 После тяжёлого понедельника', text:'Широчайшие и грудь восстанавливаются 48–72 ч. Это не лень — это часть программы. Пропустить отдых = замедлить рост.'},
-      {color:'#457b9d', title:'😴 Сон — главное сегодня', text:'Пик гормона роста в первые 2 часа глубокого сна. Лёг в 23:00 — пик в 1:00. Ляг раньше — буквально растёшь быстрее.'},
-      {color:'#2a9d8f', title:'🚶 Прогулка 20–30 мин', text:'Не кардио — просто ходьба. Улучшает кровоток, ускоряет восстановление мышц после тяжёлого дня.'}
-    ]
-  },
-
-  // ─── СРЕДА ─────────────────────────────────────────────────────
-  wed: {
-    color: '#457b9d',
-    title: 'СРЕДА — UPPER ОБЪЁМ',
-    mode: '10–15 повт · RIR 1–2 · отдых 90 сек–2 мин',
-    tip: 'Сегодня не максимальный вес — максимальное чувство мышцы. Пауза 1 сек в пике каждого движения. Акцент: верх спины, плечи, грудь.',
-    time: '90–110 мин',
-    priority: [['ВЕРХ СПИНЫ','#457b9d'],['ПЛЕЧИ','#457b9d'],['ГРУДЬ','#457b9d']],
-    warmup: [
-      'Разминаешься сам перед тренажёрами — общий блок пропускаем',
-      'Face pull 2 × 15 с лёгким весом — разогрев плечевого пояса'
-    ],
-    exercises: [
-      {
-        name: 'Тяга горизонт. блока широким хватом',
-        sets: '4 × 10–12', weight: '55 кг', rest: '90 сек–2 мин', tag: '★ АКЦЕНТ ВЕРХ СПИНЫ',
-        muscles: [['Верх спины / лопатки',55],['Широчайшие',30],['Задняя дельта',15]],
-        how: 'Хват на ширине плеч. Сидишь прямо — не откидываешься назад. Тянешь рукоять к груди. Ключевой момент: пауза 1 сек с МАКСИМАЛЬНЫМ сведением лопаток — именно это даёт акцент на верх спины, а не просто тяга руками. Без этой паузы упражнение теряет половину эффекта. Негатив 2–3 сек.',
-        tempo: 'Тянешь → пауза 1 сек лопатки → назад 2–3 сек',
-        why: 'Главное упражнение недели на верх спины. Прогрессия с 55 кг к 70+ при сохранении паузы и сведения лопаток — вот что даёт видимую прорисовку верха спины, которую ты хочешь.',
-        variants: {
-          label: 'Если тренажёр занят',
-          icon: '🔁',
-          options: [
-            {
-              id: 'main_block', name: 'Тяга блока (основной)',
-              weight: 55, unit: 'кг', reps: '10–12 повт',
-              note: 'Широкий хват, сидишь прямо, тянешь к груди со сведением лопаток. Прогрессия: +1 повтор в неделю, потом +вес.',
-              calc: 'Твой текущий рабочий вес — расти к 70+ кг постепенно.'
-            },
-            {
-              id: 't_bar', name: 'Т-гриф (второй зал)',
-              weight: 57, unit: 'кг', reps: '10–12 повт',
-              note: 'Упор грудью, тянешь рукоять к корпусу. Похожий вектор нагрузки на середину/верх спины, чуть другой угол стабилизации.',
-              calc: 'Твой диапазон в Т-грифе 50–65 кг — близко к тяге блока, без пересчёта.'
-            },
-            {
-              id: 'narrow_block', name: 'Верхний блок узким хватом',
-              weight: 50, unit: 'кг', reps: '10–12 повт',
-              note: 'Узкая V-рукоять, тянешь к верху груди. Вектор тяги сверху вниз — сильнее цепляет именно верх спины и трапецию, чем горизонтальная тяга.',
-              calc: 'Узкий хват технически легче стабилизировать → берём примерно 90% от веса горизонтальной тяги: 55 × 0.9 ≈ 50 кг.'
-            },
-            {
-              id: 'pullover', name: 'Пуловер с канатом',
-              weight: 25, unit: 'кг', reps: '12–15 повт',
-              note: 'Канат на верхнем блоке, прямые руки тянешь вниз/назад дугой. Это больше растяжение широчайших, чем верх спины — используй как разогрев или лёгкую замену.',
-              calc: 'Изолирующее движение прямыми руками — вес существенно ниже тяговых упражнений.'
-            }
-          ]
-        },
-        alt: null
-      },
-      {
-        name: 'Тяга сидя рукоятью «рога»',
-        sets: '3 × 10–12', weight: '65 кг', rest: '90 сек', tag: null,
-        muscles: [['Широчайшие',45],['Середина спины',35],['Задняя дельта',20]],
-        how: 'Садишься на тот же горизонтальный тренажёр, берёшь рукоять-«рога» (V-образная) широким горизонтальным хватом. Тянешь к корпусу с акцентом на растяжение широчайшей в начале движения и сведение в конце. Негатив 2–3 сек.',
-        tempo: 'Тянешь → пауза 1 сек → назад 2–3 сек',
-        why: 'Заменяет тягу гантели к поясу (которая выбивала по одной руке) — теперь обе стороны работают одновременно и равномерно, без перекоса по силе между руками.',
-        variability: ['65 кг — твой текущий рабочий вес','Прогресс: +1 повтор в неделю, потом +2.5–5 кг'],
-        alt: 'Нижний блок нейтральным хватом'
-      },
-      {
-        name: 'Подтягивания (добить)',
-        sets: '2 × 10', weight: 'свой вес', rest: '90 сек', tag: null,
-        muscles: [['Широчайшие',55],['Верх спины',35],['Бицепс',10]],
-        how: 'После двух тяговых упражнений спина уже наполнена кровью. Подход 1: локти вперёд — акцент широчайшие. Подход 2: хват чуть шире, локти в стороны — акцент верх спины. Медленно и осознанно, полная амплитуда, негатив 3 сек.',
-        tempo: 'Вверх плавно → вниз 3 сек',
-        why: '3-я частота спины за неделю в умеренном режиме — оптимум для гипертрофии. Тот же принцип переключения хвата, что и в понедельник, но без веса — чисто добивка.',
-        variability: ['Если устал — 1 подход вместо 2','Не до отказа — RIR 2'],
-        alt: 'Тяга верхнего блока нейтральным хватом'
-      },
-      {
-        name: 'Жим гантелей под углом 30° (грудь)',
-        sets: '3 × 10', weight: '28 кг/рука', rest: '90 сек', tag: null,
-        muscles: [['Верх груди',70],['Передняя дельта',20],['Трицепс',10]],
-        how: 'Угол СТРОГО 30° — больше уйдёт в дельты. Лопатки прижаты к скамье всё время. Локти 45° к корпусу. Опускаешь до растяжения груди. Негатив 2–3 сек.',
-        tempo: 'Вниз 2–3 сек → вверх контролируемо',
-        why: 'Объёмный режим для верха груди — больше повторений, лучше чувствуешь мышцу, чем в силовом понедельнике.',
-        variability: ['28 кг — твой текущий рабочий вес','Прогресс: +1 повтор в неделю, потом +2 кг'],
-        alt: 'Жим штанги под углом 30°'
-      },
-      {
-        name: 'Пек-дек (грудь)',
-        sets: '3 × 12–15', weight: '55 кг', rest: '90 сек', tag: null,
-        muscles: [['Грудь',90],['Передняя дельта',10]],
-        how: 'Постоянное натяжение по всей амплитуде. Пауза 1 сек в пике — грудь максимально сжата. Опускаешь до полного растяжения. Медленно назад 2–3 сек. Сводишь дугой, как обнимаешь дерево — не прямой линией.',
-        tempo: 'Вниз 2–3 сек → пауза 1 сек → вверх плавно',
-        why: 'Растяжение под нагрузкой — главный стимул гипертрофии груди. Даёт форму, которой нет в жиме.',
-        variability: ['Последний подход — до RIR 0–1'],
-        alt: 'Кроссовер / разводка гантелями лёжа'
-      },
-      {
-        name: 'Махи в стороны',
-        sets: '4 × 12–15', weight: '10–16 кг', rest: '60–90 сек', tag: '★ ПРИОРИТЕТ',
-        muscles: [['Средняя дельта',80],['Трапеция',20]],
-        how: 'Стоишь прямо. Гантели немного впереди бёдер. Ведёшь ЛОКТЕМ — не кистью. Мизинец чуть выше большого пальца в верхней точке. Пауза 0.5 сек. Негатив 2–3 сек. БЕЗ рывков корпусом.',
-        tempo: 'Вверх плавно → пауза 0.5 сек → вниз 2–3 сек',
-        why: 'Средняя дельта = ширина плеч = визуальный треугольник. 4 подхода — плечи в приоритете.',
-        variability: ['Нед. 1–2: 10–12 кг, строгая техника без рывков','Нед. 3–4: 14–16 кг','Последний подход — до RIR 0–1'],
-        alt: 'Кроссовер одной рукой / тренажёр для дельт'
-      },
-      {
-        name: 'Face pull (задняя дельта)',
-        sets: '3 × 15', weight: '25–40 кг', rest: '60–90 сек', tag: null,
-        muscles: [['Задняя дельта',75],['Верх спины',25]],
-        how: 'Канат на уровне лица. Тянешь к лицу — локти ВЫШЕ плеч обязательно. Пауза 1 сек. Медленно назад.',
-        tempo: 'Тянешь → пауза 1 сек → назад медленно',
-        why: 'Задняя дельта балансирует плечо. При подтягиваниях с весом ротаторная манжета под стрессом — face pull это профилактика травм. 2× в неделю.',
-        variability: ['25 кг — освой технику','35–40 кг — когда легко'],
-        alt: 'Обратные махи с гантелями / пек-дек реверс'
-      }
-    ]
-  },
-
-  // ─── ЧЕТВЕРГ ───────────────────────────────────────────────────
-  thu: {
-    rest: true, restType: 'active',
-    title: 'ЧЕТВЕРГ — ОТДЫХ',
-    color: '#3a3a4a',
-    subtitle: 'Заряжаемся перед пятницей',
-    checklist: [
-      'Углеводы сегодня важны — рис, гречка, картофель',
-      'Пить воду — завтра ноги и руки',
-      'Лечь пораньше — тяжёлая пятница',
-      'Растяжка квадрицепса 5–10 мин'
-    ],
-    nutrition: {kcal:'2800', protein:'180 г', carbs:'350 г', fat:'70 г'},
-    homeAbs: true,
-    tips: [
-      {color:'#8b5cf6', title:'🧘 Растяжка 15–20 мин', text:'Грудь: руки в дверном проёме 3×30 сек. Спина: повисни на перекладине 3×20 сек. Плечи: рука за голову, потяни локоть. Это ускоряет восстановление.'},
-      {color:'#2a9d8f', title:'🚶 Прогулка 30–40 мин', text:'Спокойная ходьба. Улучшает кровоток, ускоряет вывод продуктов распада из мышц. Не кардио — именно ходьба.'},
-      {color:'#e9c46a', title:'⚡ Углеводы сегодня', text:'День перед пятницей — загрузи гликоген. Рис, картофель, гречка вечером. Мышцы будут заряжены завтра.'}
-    ]
-  },
-
-  // ─── ПЯТНИЦА ───────────────────────────────────────────────────
-  fri: {
-    color: '#2a9d8f',
-    title: 'ПЯТНИЦА — НОГИ + РУКИ',
-    mode: 'RIR 1–2 · База 2–3 мин · Изоляция 60–90 сек',
-    tip: 'Ноги для поддержания — не убиваемся. Потом руки получают полноценную нагрузку. Бицепс + трицепс в одну тренировку — максимальный объём за раз.',
-    time: '75–90 мин',
-    priority: [['БИЦЕПС','#2a9d8f'],['ТРИЦЕПС','#2a9d8f'],['НОГИ','#5a5a6e']],
-    warmup: [
-      '5–7 мин: вращения в коленях, тазу, голеностопе',
-      'Жим ногами разминочный: 50% × 12 → 70% × 6 → рабочий'
-    ],
-    exercises: [
-      {
-        name: 'Жим ногами',
-        sets: '3 × 10–12', weight: '140–180 кг', rest: '2–3 мин', tag: null,
-        muscles: [['Квадрицепс',60],['Ягодицы',30],['Бицепс бедра',10]],
-        how: 'Стопы по центру платформы, ширина плеч. Опускаешь платформу медленно 2–3 сек — колени к плечам. Полный диапазон. Жмёшь не до блокировки коленей.',
-        tempo: 'Вниз 2–3 сек → вверх контролируемо',
-        why: 'Поддержание квадрицепса без осевой нагрузки на позвоночник. 3 подхода достаточно — сегодня акцент на руках.',
-        variability: ['140 кг — нед. 1','160–180 кг — нед. 3+'],
-        alt: 'Гакк-присед / Смит'
-      },
-      {
-        name: 'Румынская тяга с гантелями',
-        sets: '3 × 10', weight: '32–42 кг/рука', rest: '2 мин', tag: null,
-        muscles: [['Задняя поверхность бедра',60],['Ягодицы',40]],
-        how: 'Таз назад — не сгибаешь колени сильно. Спина нейтральна. Опускаешься до растяжения задней поверхности бедра. Негатив 2–3 сек. Встаёшь через ЯГОДИЦЫ.',
-        tempo: 'Вниз 2–3 сек → пауза 1 сек внизу → вверх через ягодицы',
-        why: 'Задняя поверхность + ягодицы. Развитые ягодицы визуально сужают талию — важно для боксёрской формы.',
-        variability: ['32 кг — нед. 1','40–42 кг — нед. 3+'],
-        alt: 'Румынская тяга со штангой'
-      },
-      {
-        name: 'Curl сидя концентрированный',
-        sets: '4 × 8–10', weight: '16–22 кг/рука', rest: '90 сек', tag: '★ АКЦЕНТ БИЦЕПС',
-        muscles: [['Бицепс',85],['Брахиалис',15]],
-        how: 'Сидишь на скамье, локоть упирается в бедро. Внизу — полное растяжение с супинацией (разворот ладони наружу). Вверху — пауза 1 сек, полное сокращение. Негатив 2–3 сек МЕДЛЕННО. Одна рука, потом другая. Никакого раскачивания.',
+        name: 'Тяга в Смите', weight: 82, unit: 'кг (+ пояс)', sets: '4', reps: '6', rest: 150, tag: null,
+        muscles: [['Середина спины', 50], ['Широчайшие', 30], ['Задняя дельта', 20]],
+        how: 'Наклон 30–45°, спина нейтральна. Тянешь гриф к пупку, пауза 1 сек со сведением лопаток.',
         tempo: 'Вверх контролируемо → пауза 1 сек → вниз 2–3 сек',
-        why: 'Лучшее упражнение для ПИКА бицепса. Локоть зафиксирован — 100% нагрузки на бицепс. Ты чувствуешь его лучше чем со штангой стоя.',
-        variability: ['16–18 кг — нед. 1–2, строгий темп','20–22 кг — нед. 3+','Последний подход каждой руки — до RIR 0'],
-        alt: 'Curl со штангой стоя 35–50 кг'
+        progression: 'Чистые 4×6 → +5 кг.',
+        altVariants: [{ name: 'Свободная штанга', weight: 82, unit: 'кг', note: 'Тот же вес и наклон — больше стабилизации корпусом, чем в Смите.' }]
       },
       {
-        name: 'Обратный curl с EZ-грифом (брахиалис)',
-        sets: '3 × 10–12', weight: '20–30 кг', rest: '90 сек', tag: null,
-        muscles: [['Брахиалис',55],['Плечелучевая',30],['Бицепс',15]],
-        how: 'Обратный хват (ладони вниз) на EZ-грифе (зигзагообразная). Локти прижаты к корпусу — не двигаются. Небольшой вес — техника важнее. Полная амплитуда. Негатив 2–3 сек.',
-        tempo: 'Вверх → пауза 0.5 сек → вниз 2–3 сек',
-        why: 'Брахиалис — мышца под бицепсом. Её рост визуально "выталкивает" бицепс и делает руку объёмнее.',
-        variability: ['20 кг — нед. 1','25–30 кг — нед. 3+'],
-        alt: 'Hammer curl с гантелями / обратный curl со штангой'
-      },
-      {
-        name: 'Брусья с весом (трицепс)',
-        sets: '4 × 8', weight: '+41 кг', rest: '2 мин', tag: '★ ЛЮБИМОЕ',
-        muscles: [['Трицепс',80],['Грудь',12],['Передняя дельта',8]],
-        how: 'Корпус ВЕРТИКАЛЬНО — это переносит акцент на трицепс. Локти близко к корпусу. Опускаешься до угла 90° в локтях. Жмёшь вверх полностью — трицепс в полном сокращении. Негатив 2–3 сек.',
+        name: 'Брусья с весом', weight: 20, unit: 'кг', sets: '3', reps: '8', rest: 120, tag: '★ ЛЮБИМОЕ',
+        muscles: [['Грудь', 55], ['Трицепс', 35], ['Передняя дельта', 10]],
+        how: 'Наклон корпуса вперёд ~30° — переносит нагрузку с трицепса на грудь. Вниз до параллели предплечий с полом.',
         tempo: 'Вниз 2–3 сек → вверх взрывно',
-        why: 'Трицепс — 65% объёма руки. +41 кг (2 блина по 45lb) — серьёзная нагрузка. Это главное упражнение для каменных трицепсов.',
-        variability: ['Когда 8 повт легко на всех подходах — +2.5 кг','Последний подход — до RIR 0–1'],
-        alt: 'Французский жим лёжа / жим узким хватом'
+        progression: '3×8 чисто → +2.5 кг.'
       },
       {
-        name: 'Трицепс на блоке (прямой хват)',
-        sets: '3 × 12–15', weight: '25–40 кг', rest: '60–90 сек', tag: null,
-        muscles: [['Боковая головка трицепса',60],['Трицепс общий',40]],
-        how: 'Прямой хват (не обратный) — акцент на боковую головку. Локти прижаты к корпусу — не двигаются. Жмёшь вниз до полного разгибания. Пауза 1 сек в нижней точке. Медленно вверх 2–3 сек.',
-        tempo: 'Вниз до разгибания → пауза 1 сек → вверх 2–3 сек',
-        why: 'Добивает трицепс в изоляции. Прямой хват = акцент на боковую головку — она даёт "подкову" которую видно с бока.',
-        variability: ['25 кг — нед. 1','35–40 кг — нед. 3+'],
-        alt: 'Французский жим стоя с канатом'
-      },
-      {
-        name: 'Кикбэк с гантелью (боковая головка)',
-        sets: '2 × 12–15', weight: '10–16 кг', rest: '60 сек', tag: '★ ДОБИВКА',
-        muscles: [['Боковая головка трицепса',80],['Трицепс общий',20]],
-        how: 'Встаёшь у скамьи, наклон корпуса вперёд ~45° (спина прямая, не округлена). Локоть прижат к боку и поднят так, что плечо параллельно полу — это ключевая точка, локоть НЕ двигается всё упражнение. Из этого положения разгибаешь руку строго НАЗАД (параллельно полу), не вверх и не вниз. В точке полного разгибания — пауза 1 сек, именно здесь боковая головка трицепса работает максимально. Медленно сгибаешь обратно 2 сек, не давая гантели "падать".',
-        tempo: 'Разгибаешь назад → пауза 1 сек → сгибаешь 2 сек',
-        why: 'Чисто на боковую головку трицепса. После блока с прямым хватом — полное добивание. Вот откуда красивая "подкова" по бокам руки.',
-        variability: ['10–12 кг — осваивай технику, локоть должен быть полностью статичен','14–16 кг — когда зафиксировал локоть уверенно'],
-        alt: 'Трицепс на блоке обратным хватом'
+        name: 'Жим гантелей сидя', weight: 25, unit: 'кг/рука', weightLo: 22, weightHi: 28, sets: '2', reps: '8–10', rest: 90, tag: null,
+        muscles: [['Передняя дельта', 50], ['Средняя дельта', 35], ['Трицепс', 15]],
+        how: 'Спина прямая, локти чуть впереди корпуса. Опускаешь до уровня ушей, не ниже.',
+        tempo: 'Вниз 2–3 сек → вверх контролируемо',
+        progression: 'Диапазон 22–28 кг — расти по 2 кг, когда 8–10 повторов даются легко на обоих подходах.'
       }
     ]
   },
 
-  // ─── СУББОТА ───────────────────────────────────────────────────
-  sat: {
-    color: '#e9c46a',
-    title: 'СУББОТА — БОКС + ДОБИВКА',
-    mode: 'RIR 2–3 · лёгкий режим · отдых 60–90 сек · ~1 час всего',
-    tip: 'Бокс сделал своё дело. Добивка лёгкая — кровь в мышцах, техника, восстановление. Никакого максимума. У тебя час времени — план рассчитан именно на это окно.',
-    time: '45–55 мин',
-    priority: [['СПИНА','#e9c46a'],['ПЛЕЧИ','#e9c46a'],['ГРУДЬ','#5a5a6e']],
-    warmup: ['3–5 мин разминка — после боксёрской ты уже разогрет'],
-    exercises: [
-      {
-        name: 'Подтягивания',
-        sets: '3 × 10–12', weight: 'свой вес', rest: '90 сек', tag: null,
-        muscles: [['Широчайшие',60],['Верх спины',25],['Бицепс',15]],
-        how: 'Медленно и осознанно. Сегодня — качество движения, не максимум. Полная амплитуда. Негатив 2–3 сек. Лёгкий день — не гони темп.',
-        tempo: 'Вверх плавно → вниз 2–3 сек',
-        why: '3-я частота спины за неделю в лёгком режиме — оптимум для роста широчайших без перегрузки перед новой неделей.',
-        variability: ['Если устал после бокса — 2 подхода вместо 3'],
-        alt: 'Тяга верхнего блока лёгкий вес'
-      },
-      {
-        name: 'Пек-дек лёгкий (грудь)',
-        sets: '3 × 12–15', weight: '25–35 кг', rest: '60–90 сек', tag: null,
-        muscles: [['Грудь',90],['Передняя дельта',10]],
-        how: 'Лёгкий вес — сегодня про чувство мышцы, не нагрузку. Пауза 1 сек в сведении. Медленно назад.',
-        tempo: 'Вниз 2–3 сек → пауза 1 сек → вверх плавно',
-        why: 'За неделю на грудь и так выходит немного объёма (ПН силовой + СР объёмный) — лёгкая добивка здесь не помешает и заодно разгружает спину от лишнего объёма в субботу.',
-        variability: [],
-        alt: 'Разводка гантелями лёжа лёгкая'
-      },
-      {
-        name: 'Махи в стороны',
-        sets: '3 × 15–20', weight: '8–12 кг', rest: '60 сек', tag: null,
-        muscles: [['Средняя дельта',80],['Трапеция',20]],
-        how: 'Чистая техника. Сегодня цель — прочувствовать среднюю дельту, не поднять максимум. Никаких рывков. Медленно вниз 2–3 сек.',
-        tempo: 'Вверх плавно → вниз 2–3 сек',
-        why: '3-я частота плеч в лёгком режиме. Дельты реагируют на высокую частоту.',
-        variability: [],
-        alt: null
-      },
-      {
-        name: 'Face pull',
-        sets: '3 × 15–20', weight: '20–30 кг', rest: '60 сек', tag: '★',
-        muscles: [['Задняя дельта',70],['Верх спины',30]],
-        how: 'Канат на уровне лица. Тянешь к лицу — локти ВЫШЕ плеч. Пауза 1 сек. Медленно назад.',
-        tempo: 'Тянешь → пауза 1 сек → назад медленно',
-        why: '2× в неделю face pull = профилактика травм плеча при тяжёлых подтягиваниях с весом. Не пропускать.',
-        variability: [],
-        alt: 'Обратные махи лёжа'
-      },
-      {
-        name: 'Гиперэкстензия',
-        sets: '2–3 × 15', weight: 'свой вес / +5–10 кг', rest: '60 сек', tag: null,
-        muscles: [['Поясница',50],['Ягодицы',30],['Бицепс бедра',20]],
-        how: 'До линии тела — без переразгибания. Пауза 1 сек вверху. Спина нейтральна.',
-        tempo: 'Вверх → пауза 1 сек → вниз медленно',
-        why: 'Поддержание здоровья поясницы — важно для всех тяговых движений.',
-        variability: ['Без веса — если поясница устала после пятницы'],
-        alt: null
-      }
-    ]
-  },
-
-  // ─── ВОСКРЕСЕНЬЕ ───────────────────────────────────────────────
-  sun: {
-    rest: true, restType: 'full',
-    title: 'ВОСКРЕСЕНЬЕ — ПОЛНЫЙ ОТДЫХ',
-    color: '#3a3a4a',
-    subtitle: 'Четыре тренировки сделаны. Сейчас ты растёшь.',
-    checklist: [
-      'Контрастный душ: тёплая/прохладная по 30 сек',
-      'Запиши веса на следующую неделю',
-      'Фоам-роллер: спина, грудь, плечи',
-      'Лечь пораньше — завтра понедельник',
-      'Оцени что прогрессировало на этой неделе'
-    ],
-    nutrition: {kcal:'2800', protein:'180 г', carbs:'350 г', fat:'70 г'},
+  tue: {
+    rest: true, color: '#3a3a44',
+    title: 'ВТОРНИК — ОТДЫХ', subtitle: 'Спина и грудь растут именно сейчас',
+    checklist: ['Белок — не проседай в день отдыха', 'Вода 2.5–3 л', 'Сон 7–9 часов'],
+    nutrition: { kcal: '2750–2850', protein: '175–190 г', carbs: '330–360 г', fat: '65–75 г' },
     homeAbs: true,
     tips: [
-      {color:'#3a3a4a', title:'🌿 Полный отдых', text:'Тело растёт не на тренировке — между ними. Сегодня мышцы синтезируют белок максимально активно. Это часть программы.'},
-      {color:'#457b9d', title:'😴 Сон сегодня особенно важен', text:'Лёг в 23:00 — пик ГР в 1:00. Не скролли до 2 ночи. Это буквально влияет на рост мышц.'},
-      {color:'#e9c46a', title:'📋 Планирование на неделю', text:'Запиши веса которые хочешь поставить в понедельник. Увидел прогресс? Зафиксируй. Не было? Разберись почему.'}
+      { color: '#e63946', title: '🔋 Восстановление 48–72 ч', text: 'Широчайшие и грудь после понедельника ещё восстанавливаются. Отдых — часть программы, не пропуск.' },
+      { color: '#457bd1', title: '😴 Сон', text: 'Пик гормона роста — в первые 1–2 часа глубокого сна. Лёг раньше — восстановился быстрее.' }
+    ]
+  },
+
+  wed: {
+    color: '#457bd1', title: 'СРЕДА — ОБЪЁМ', tabType: 'Объём',
+    mode: 'Суперсеты + дроп-сеты · отдых 60–90 сек',
+    exercises: [
+      {
+        name: 'Тяга горизонт. блока широким хватом', weight: 55, unit: 'кг', sets: '4', reps: '10–12', rest: 90, tag: '★ АКЦЕНТ СПИНА',
+        muscles: [['Верх спины/лопатки', 55], ['Широчайшие', 30], ['Задняя дельта', 15]],
+        how: 'Сидишь прямо, тянешь рукоять к груди, пауза 1 сек с максимальным сведением лопаток.',
+        tempo: 'Тянешь → пауза 1 сек → назад 2–3 сек',
+        progression: '+1 повтор в неделю, когда дойдёшь до 12 на всех подходах → +5 кг, начни снова с 10.',
+        dropset: { note: 'Последний (4-й) подход: 55 кг → сразу 41 кг до отказа, без паузы на смену веса.' },
+        altVariants: [
+          { name: 'Т-бар', weight: 57, unit: 'кг', note: 'Упор грудью, похожий вектор на середину/верх спины.' },
+          { name: 'Верхний блок узким хватом', weight: 50, unit: 'кг', note: 'Вектор сверху вниз, сильнее цепляет верх спины и трапецию.' },
+          { name: 'Пуловер с канатом', weight: 25, unit: 'кг', note: 'Растяжение широчайших прямыми руками — для разогрева или лёгкой замены.' }
+        ]
+      },
+      {
+        combo: true, label: 'СУПЕРСЕТ', rounds: 3, restBetweenRounds: 90,
+        note: 'Без паузы между А и Б внутри раунда, отдых 90 сек только после пары — так 3 раунда подряд.',
+        items: [
+          { name: 'А. Жим гантелей 30°', weight: 28, unit: 'кг/рука', reps: '10',
+            muscles: [['Верх груди', 65], ['Передняя дельта', 20], ['Трицепс', 15]],
+            how: 'Угол строго 30°, лопатки прижаты к скамье.', tempo: 'Вниз 2–3 сек → вверх контролируемо',
+            progression: '+1 повтор в неделю → +2 кг.' },
+          { name: 'Б. Тяга рогами', weight: 65, unit: 'кг', reps: '10',
+            muscles: [['Широчайшие', 45], ['Середина спины', 35], ['Задняя дельта', 20]],
+            how: 'Широкая V-рукоять, растяжение внизу, сведение лопаток вверху.', tempo: 'Тянешь → пауза 1 сек → назад 2–3 сек',
+            progression: '+1 повтор в неделю → +2 кг.' }
+        ]
+      },
+      {
+        name: 'Подтягивания', weight: null, unit: 'свой вес', sets: '2', reps: '10', rest: 90, tag: null,
+        muscles: [['Широчайшие', 55], ['Верх спины', 35], ['Бицепс', 10]],
+        how: 'Подх. 1: локти вперёд — акцент широчайшие. Подх. 2: локти в стороны — акцент верх спины. Медленно и осознанно.',
+        tempo: 'Вверх плавно → вниз 3 сек',
+        progression: 'Держи технику — это добивка, а не силовой подход.'
+      },
+      {
+        name: 'Пек-дек', weight: 55, unit: 'кг', sets: '3', reps: '12–15', rest: 90, tag: null,
+        muscles: [['Грудь', 90], ['Передняя дельта', 10]],
+        how: 'Постоянное натяжение, пауза 1 сек в сведении, сводишь дугой.',
+        tempo: 'Вниз 2–3 сек → пауза 1 сек → вверх плавно',
+        progression: '+1 повтор в неделю → +5 кг.',
+        dropset: { note: 'Последний (3-й) подход: 55 кг → сразу 38 кг до отказа.' }
+      },
+      {
+        name: 'Махи в стороны', weight: 13, weightLo: 10, weightHi: 16, unit: 'кг', sets: '4', reps: '12–15', rest: 60, tag: '★ ПРИОРИТЕТ',
+        muscles: [['Средняя дельта', 80], ['Трапеция', 20]],
+        how: 'Ведёшь локтем, не кистью, без рывков корпусом.',
+        tempo: 'Вверх плавно → пауза 0.5 сек → вниз 2–3 сек',
+        progression: 'Диапазон 10–16 кг — расти по 2 кг, когда техника чистая на всех подходах.',
+        dropset: { note: 'Последний (4-й) подход: 16 кг → сразу 10 кг до отказа.' }
+      },
+      {
+        name: 'Face pull', weight: 32, weightLo: 25, weightHi: 40, unit: 'кг', sets: '3', reps: '15', rest: 60, tag: null,
+        muscles: [['Задняя дельта', 75], ['Верх спины', 25]],
+        how: 'Канат на уровне лица, локти выше плеч, пауза 1 сек.',
+        tempo: 'Тянешь → пауза 1 сек → назад медленно',
+        progression: 'Диапазон 25–40 кг — профилактика плеча, расти не в ущерб технике.'
+      }
+    ]
+  },
+
+  thu: {
+    rest: true, color: '#3a3a44',
+    title: 'ЧЕТВЕРГ — ОТДЫХ', subtitle: 'Заряжаемся перед пятницей',
+    checklist: ['Углеводы важны сегодня', 'Лечь пораньше', 'Ходьба 20–30 мин'],
+    nutrition: { kcal: '2750–2850', protein: '175–190 г', carbs: '330–360 г', fat: '65–75 г' },
+    homeAbs: true,
+    tips: [
+      { color: '#2fbf8f', title: '🚶 Прогулка', text: 'Спокойная ходьба ускоряет кровоток и восстановление — не кардио для похудения.' },
+      { color: '#e9b93e', title: '⚡ Углеводы', text: 'Пятница — руки и ноги, гликоген должен быть заполнен уже сегодня.' }
+    ]
+  },
+
+  fri: {
+    color: '#2fbf8f', title: 'ПЯТНИЦА — РУКИ + НОГИ', tabType: 'Руки+Ноги',
+    mode: 'Суперсет + дроп-сеты + rest-pause',
+    exercises: [
+      {
+        name: 'Жим ногами', weight: 160, weightLo: 140, weightHi: 180, unit: 'кг', sets: '3', reps: '10–12', rest: 120, tag: null,
+        muscles: [['Квадрицепс', 60], ['Ягодицы', 30], ['Бицепс бедра', 10]],
+        how: 'Стопы по центру платформы. Вниз медленно, колени к плечам, полная амплитуда.',
+        tempo: 'Вниз 2–3 сек → вверх контролируемо',
+        progression: 'Диапазон 140–180 кг — ноги на поддержании, расти не спеша.'
+      },
+      {
+        name: 'Румынская тяга с гантелями', weight: 37, weightLo: 32, weightHi: 42, unit: 'кг/рука', sets: '3', reps: '10', rest: 90, tag: null,
+        muscles: [['Задняя поверхность бедра', 60], ['Ягодицы', 40]],
+        how: 'Таз назад, спина нейтральна, вниз до растяжения, встаёшь через ягодицы.',
+        tempo: 'Вниз 2–3 сек → пауза 1 сек внизу → вверх через ягодицы',
+        progression: 'Диапазон 32–42 кг.'
+      },
+      {
+        combo: true, label: 'СУПЕРСЕТ', rounds: 4, restBetweenRounds: 60,
+        note: 'Curl сразу без паузы переходит в трицепс на блоке, отдых 60 сек только после пары. 4 раунда.',
+        items: [
+          { name: 'А. Curl концентрированный', weight: 19, weightLo: 16, weightHi: 22, unit: 'кг/рука', reps: '8–10',
+            muscles: [['Бицепс', 85], ['Брахиалис', 15]],
+            how: 'Локоть упирается в бедро, полное растяжение внизу с супинацией, пауза 1 сек вверху.', tempo: 'Вверх контролируемо → пауза 1 сек → вниз 2–3 сек',
+            progression: 'Диапазон 16–22 кг.',
+            dropset: { note: 'Финальный (4-й) раунд: 20 кг → сразу 16 кг до отказа.' } },
+          { name: 'Б. Трицепс на блоке (прямой хват)', weight: 32, weightLo: 25, weightHi: 40, unit: 'кг', reps: '12–15',
+            muscles: [['Боковая головка трицепса', 60], ['Трицепс общий', 40]],
+            how: 'Локти прижаты к корпусу, жмёшь вниз до разгибания, пауза 1 сек.', tempo: 'Вниз → пауза 1 сек → вверх 2–3 сек',
+            progression: 'Диапазон 25–40 кг.',
+            dropset: { note: 'Финальный (4-й) раунд: 35 кг → сразу 22 кг до отказа.' } }
+        ]
+      },
+      {
+        name: 'Обратный curl EZ-гриф', weight: 25, weightLo: 20, weightHi: 30, unit: 'кг', sets: '3', reps: '10–12', rest: 90, tag: null,
+        muscles: [['Брахиалис', 55], ['Плечелучевая', 30], ['Бицепс', 15]],
+        how: 'Обратный хват, локти прижаты к корпусу, техника важнее веса.',
+        tempo: 'Вверх → пауза 0.5 сек → вниз 2–3 сек',
+        progression: 'Диапазон 20–30 кг.'
+      },
+      {
+        name: 'Брусья с весом (трицепс)', weight: 41, unit: 'кг', sets: '4', reps: '8', rest: 120, tag: '★ ЛЮБИМОЕ',
+        muscles: [['Трицепс', 80], ['Грудь', 12], ['Передняя дельта', 8]],
+        how: 'Корпус вертикально — акцент трицепс. Локти близко к корпусу, вниз до 90° в локтях.',
+        tempo: 'Вниз 2–3 сек → вверх взрывно',
+        progression: 'Когда все 4×8 чисто → +2.5 кг.',
+        restpause: { note: 'Финальный (4-й) подход: 8 повторов → отдых 15 сек → 3–4 повтора → отдых 15 сек → 2 повтора. Тот же вес на всех трёх мини-подходах.' }
+      },
+      {
+        name: 'Кикбэк с гантелью', weight: 13, weightLo: 10, weightHi: 16, unit: 'кг', sets: '2', reps: '12–15', rest: 60, tag: '★ ДОБИВКА',
+        muscles: [['Боковая головка трицепса', 80], ['Трицепс общий', 20]],
+        how: 'Плечо параллельно полу, локоть статичен, разгибание строго назад, пауза 1 сек в разгибании.',
+        tempo: 'Назад → пауза 1 сек → сгибаешь 2 сек',
+        progression: 'Диапазон 10–16 кг — вес растёт только когда локоть полностью статичен.'
+      }
+    ]
+  },
+
+  sat: {
+    color: '#e9b93e', title: 'СУББОТА — ПОСЛЕ БОКСА', tabType: 'После бокса',
+    mode: '50–60 мин · разминка не нужна · отдых короче',
+    exercises: [
+      {
+        name: 'Т-бар', weight: 50, unit: 'кг', sets: '3', reps: '10–12', rest: 60, tag: '★ АКЦЕНТ ВЕРХ СПИНЫ',
+        muscles: [['Верх спины/лопатки', 60], ['Широчайшие', 25], ['Задняя дельта', 15]],
+        how: 'Упор грудью, поясница выключена. Тянешь рукояти к корпусу, пауза 1 сек со сведением лопаток.',
+        tempo: 'Тянешь → пауза 1 сек → назад 2–3 сек',
+        progression: 'После бокса ты уже разогрет — вес держи стабильным, не гонись за рекордом в этот день.'
+      },
+      {
+        combo: true, label: 'СУПЕРСЕТ', rounds: 3, restBetweenRounds: 60,
+        note: 'Пек-дек сразу переходит в face pull, отдых 60 сек после пары. 3 раунда.',
+        items: [
+          { name: 'А. Пек-дек', weight: 30, weightLo: 25, weightHi: 35, unit: 'кг', reps: '12–15',
+            muscles: [['Грудь', 90], ['Передняя дельта', 10]],
+            how: 'Лёгкий вес, акцент на чувство сведения, а не нагрузку.', tempo: 'Вниз 2–3 сек → пауза 1 сек → вверх плавно',
+            progression: 'Лёгкий день — вес не приоритет.' },
+          { name: 'Б. Face pull', weight: 25, weightLo: 20, weightHi: 30, unit: 'кг', reps: '15',
+            muscles: [['Задняя дельта', 70], ['Верх спины', 30]],
+            how: 'Канат на уровне лица, локти выше плеч.', tempo: 'Тянешь → пауза 1 сек → назад медленно',
+            progression: 'Профилактика плеча — 2× в неделю (среда + суббота).' }
+        ]
+      },
+      {
+        name: 'Махи в стороны', weight: 10, weightLo: 8, weightHi: 12, unit: 'кг', sets: '3', reps: '15–20', rest: 45, tag: null,
+        muscles: [['Средняя дельта', 80], ['Трапеция', 20]],
+        how: 'Чистая техника, цель — прочувствовать дельту, не поднять максимум.',
+        tempo: 'Вверх плавно → вниз 2–3 сек',
+        progression: 'Лёгкий день — техника важнее веса.',
+        dropset: { note: 'Последний (3-й) подход: 10 кг → сразу 6 кг до отказа.' }
+      },
+      {
+        name: 'Подтягивания', weight: null, unit: 'свой вес', sets: '2–3', reps: '10–12', rest: 90, tag: null,
+        muscles: [['Широчайшие', 60], ['Верх спины', 25], ['Бицепс', 15]],
+        how: 'Полная амплитуда, негатив 2–3 сек, качество важнее темпа.',
+        tempo: 'Вверх плавно → вниз 2–3 сек',
+        progression: 'Устал после бокса — сделай 2 подхода вместо 3.'
+      },
+      {
+        name: 'Гиперэкстензия', weight: null, unit: 'свой вес / +5–10 кг', sets: '2', reps: '15', rest: 45, tag: null,
+        muscles: [['Поясница', 50], ['Ягодицы', 30], ['Бицепс бедра', 20]],
+        how: 'До линии тела без переразгибания, пауза 1 сек вверху.',
+        tempo: 'Вверх → пауза 1 сек → вниз медленно',
+        progression: 'Без веса, если поясница устала после пятницы.'
+      }
+    ]
+  },
+
+  sun: {
+    rest: true, color: '#3a3a44',
+    title: 'ВОСКРЕСЕНЬЕ — ОТДЫХ', subtitle: 'Четыре тренировки сделаны. Сейчас ты растёшь.',
+    checklist: ['Фоам-роллер: спина, грудь, плечи', 'Сон пораньше — завтра тяжёлый понедельник'],
+    nutrition: { kcal: '2750–2850', protein: '175–190 г', carbs: '330–360 г', fat: '65–75 г' },
+    homeAbs: true,
+    tips: [
+      { color: '#3a3a44', title: '🌿 Рост — не на тренировке', text: 'Синтез белка максимально активен именно в дни отдыха.' },
+      { color: '#e9b93e', title: '📋 Планирование', text: 'Подумай, какой вес хочешь поставить в понедельник.' }
     ]
   }
 };
 
-// ─── RENDER ────────────────────────────────────────────────────────────────
+const DAY_ORDER = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+const DAY_LABEL = { mon: 'ПН', tue: 'ВТ', wed: 'СР', thu: 'ЧТ', fri: 'ПТ', sat: 'СБ', sun: 'ВС' };
+/* ---------------------------------------------------------------------- */
+/* RULES SCREEN CONTENT                                                    */
+/* ---------------------------------------------------------------------- */
+
+function renderRules() {
+  const el = document.getElementById('rulesContent');
+  el.innerHTML = `
+    <div class="section-title">RIR — запас повторений</div>
+    <div class="rule-card">
+      <p>RIR (Reps In Reserve) — сколько повторов ты мог бы ещё сделать до отказа. Это не догадка, а навык, который тренируется за 4–6 недель.</p>
+    </div>
+    <div class="scale-row" style="border-color:#2fbf8f"><div class="sn">3</div><div class="sd"><b>RIR 3 — легко</b><span>Скорость движения высокая на каждом повторе. Ощущение разминочного подхода.</span></div></div>
+    <div class="scale-row" style="border-color:#457bd1"><div class="sn">2</div><div class="sd"><b>RIR 2 — рабочий</b><span>Скорость падает на последних 1–2 повторах, но техника чистая. Основной ориентир на базе.</span></div></div>
+    <div class="scale-row" style="border-color:#e9b93e"><div class="sn">1</div><div class="sd"><b>RIR 1 — тяжело</b><span>Последний повтор с заметным замедлением. Уместен на изоляции и финальных подходах.</span></div></div>
+    <div class="scale-row" style="border-color:#e63946"><div class="sn">0</div><div class="sd"><b>RIR 0 — отказ</b><span>Следующий повтор невозможен технично. Только изоляция, только последний подход — никогда на тяжёлой базе.</span></div></div>
+
+    <div class="section-title">Суперсет</div>
+    <div class="rule-card">
+      <h4>🔗 Что это</h4>
+      <p>Два упражнения выполняются подряд без отдыха между ними, отдых — только после завершения пары. В программе суперсеты только на изоляции/мелких группах (руки, дельты) или на противоположных по функции мышцах (грудь толкает / спина тянет в среду) — там усталость от первого движения не портит технику второго.</p>
+    </div>
+
+    <div class="section-title">Дроп-сет</div>
+    <div class="rule-card">
+      <h4 style="color:#ff8891">📉 Что это</h4>
+      <p>Последний подход упражнения: довёл до целевых повторов, сразу без паузы снизил вес (обычно на 20–30%) и продолжил до отказа. Работает только там, где смена веса занимает секунды — на блоках и тренажёрах, не на свободной штанге.</p>
+    </div>
+
+    <div class="section-title">Rest-pause</div>
+    <div class="rule-card">
+      <h4 style="color:#ffcfa3">⏸ Что это</h4>
+      <p>Довёл подход почти до отказа, отдохнул 15–20 сек не выпуская снаряд из зоны, затем добил ещё несколько повторов тем же весом, при необходимости повторил ещё раз. Позволяет набрать больше эффективных повторов на тяжёлом весе, чем один сплошной подход — используется точечно, на финальном подходе тяжёлого движения.</p>
+    </div>
+
+    <div class="section-title">Прогрессия</div>
+    <div class="rule-card">
+      <h4>📈 Когда добавлять вес</h4>
+      <p>Выполнил все подходы на верхней границе диапазона повторов чисто (техника не пострадала) → добавляй вес: 2.5–5 кг на базе, 1–2 кг на изоляции.</p>
+    </div>
+    <div class="rule-card">
+      <h4>＝ Когда оставить тот же вес</h4>
+      <p>Повторы падают от подхода к подходу (например 8-7-6 вместо 8-8-8) — это нормальная усталость. Держи вес тем же и в следующий раз попробуй закрыть диапазон целиком.</p>
+    </div>
+    <div class="rule-card">
+      <h4>↓ Когда снижать вес</h4>
+      <p>Не достаёшь нижнюю границу диапазона, или техника рассыпается (читинг, укороченная амплитуда, потеря контроля негатива) — снижай вес на 5–10% и заново набирай повторы.</p>
+    </div>
+    <div class="rule-card">
+      <h4>⚠ Плато 2 недели</h4>
+      <p>Если конкретное упражнение не растёт две тренировки подряд — не форсируй вес. Убери один рабочий подход на 1–2 недели, оставь вес прежним. Обычно это перезапускает прогресс.</p>
+    </div>
+
+    <div class="section-title">Отдых между подходами</div>
+    <div class="rule-card">
+      <ul>
+        <li>Тяжёлая база (понедельник): 2–2.5 мин, не меньше</li>
+        <li>Объёмная работа (среда): 60–90 сек</li>
+        <li>Суперсеты: 60–90 сек только после пары, между А и Б — без отдыха</li>
+        <li>После бокса (суббота): 45–60 сек — ты уже разогрет</li>
+      </ul>
+    </div>
+
+    <div class="section-title">Сон</div>
+    <div class="rule-card">
+      <h4>😴 Сон = рост</h4>
+      <p>Большая часть восстановления и роста мышц происходит во сне. Пик гормона роста — в первые 1–2 часа глубокого сна. 7–9 часов — физиологическое условие, а не рекомендация для галочки.</p>
+    </div>
+  `;
+}
+/* ---------------------------------------------------------------------- */
+/* STORAGE HELPERS (persistent storage substitutes localStorage)           */
+/* ---------------------------------------------------------------------- */
+
+STATE.keyIndex = [];
+
+async function markKey(k) {
+  if (STATE.keyIndex.indexOf(k) === -1) {
+    STATE.keyIndex.push(k);
+    try { await window.storage.set('meta:allkeys', JSON.stringify(STATE.keyIndex), false); } catch (e) {}
+  }
+}
+async function loadKeyIndex() {
+  try { const r = await window.storage.get('meta:allkeys', false); STATE.keyIndex = r ? JSON.parse(r.value) : []; }
+  catch (e) { STATE.keyIndex = []; }
+}
+async function storSet(key, value) {
+  try { await window.storage.set(key, JSON.stringify(value), false); await markKey(key); return true; }
+  catch (e) { console.error('storage set failed', e); return false; }
+}
+async function storGet(key) {
+  try { const r = await window.storage.get(key, false); return r ? JSON.parse(r.value) : null; }
+  catch (e) { return null; }
+}
+
+/* ---------------------------------------------------------------------- */
+/* SETTINGS (units)                                                         */
+/* ---------------------------------------------------------------------- */
+
+async function loadSettings() {
+  const s = await storGet('settings');
+  if (s && s.units) STATE.units = s.units;
+}
+async function saveSettings() { await storSet('settings', { units: STATE.units }); }
+
+function setUnits(u) {
+  STATE.units = u;
+  document.getElementById('unit-kg').classList.toggle('active', u === 'kg');
+  document.getElementById('unit-lb').classList.toggle('active', u === 'lb');
+  saveSettings();
+  if (document.getElementById('screen-workout').classList.contains('active')) renderDay(currentDay);
+}
+
+/* ---------------------------------------------------------------------- */
+/* NOTES (per exercise, persisted)                                         */
+/* ---------------------------------------------------------------------- */
+
+let noteSaveTimer = null;
+function onNoteInput(dayKey, key, value) {
+  const el = document.getElementById(`saved-${dayKey}-${key}`);
+  if (el) el.textContent = '';
+  clearTimeout(noteSaveTimer);
+  noteSaveTimer = setTimeout(async () => {
+    await storSet(`note:${dayKey}:${key}`, value);
+    if (el) { el.textContent = 'Сохранено ✓'; setTimeout(() => { if (el) el.textContent = ''; }, 1500); }
+  }, 500);
+}
+
+async function hydrateNotes(dayKey) {
+  for (const k of STATE.keyIndex) {
+    const prefix = `note:${dayKey}:`;
+    if (k.indexOf(prefix) === 0) {
+      const key = k.slice(prefix.length);
+      const val = await storGet(k);
+      const ta = document.getElementById(`notes-${dayKey}-${key}`);
+      if (ta && val) ta.value = val;
+    }
+  }
+}
+
+/* ---------------------------------------------------------------------- */
+/* VARIANT SWITCHER                                                        */
+/* ---------------------------------------------------------------------- */
+
+function selectVariant(dayKey, key, vi, color) {
+  const variants = getExByKey(dayKey, key).altVariants;
+  variants.forEach((opt, i) => {
+    const pill = document.getElementById(`vpill-${dayKey}-${key}-${i}`);
+    const detail = document.getElementById(`vdetail-${dayKey}-${key}-${i}`);
+    if (i === vi) { pill.classList.add('active'); pill.style.background = color; detail.style.display = 'block'; }
+    else { pill.classList.remove('active'); pill.style.background = ''; detail.style.display = 'none'; }
+  });
+}
+
+/* ---------------------------------------------------------------------- */
+/* FULLSCREEN REST TIMER                                                   */
+/* ---------------------------------------------------------------------- */
+
+let timerInterval = null;
+let timerRemaining = 0;
+let timerTotal = 0;
+const TIMER_FS_CIRC = 552.9; // 2*PI*88
+
+function startTimer(totalSec, label) {
+  clearInterval(timerInterval);
+  const overlay = document.getElementById('timerFs');
+  const labelEl = document.getElementById('timerFsLabel');
+  const valEl = document.getElementById('timerFsVal');
+  const circle = document.getElementById('timerFsCircle');
+  labelEl.textContent = 'ОТДЫХ · ' + label.toUpperCase();
+  overlay.classList.add('show');
+  timerTotal = totalSec;
+  timerRemaining = totalSec;
+
+  function render() {
+    const r = Math.max(0, timerRemaining);
+    const m = Math.floor(r / 60), s = r % 60;
+    valEl.textContent = m + ':' + String(s).padStart(2, '0');
+    const frac = Math.max(0, r / timerTotal);
+    circle.setAttribute('stroke-dashoffset', String(TIMER_FS_CIRC * (1 - frac)));
+  }
+  render();
+  timerInterval = setInterval(() => {
+    timerRemaining--;
+    if (timerRemaining <= 0) {
+      clearInterval(timerInterval);
+      valEl.textContent = '0:00';
+      labelEl.textContent = 'ПОРА РАБОТАТЬ';
+      if (navigator.vibrate) { try { navigator.vibrate([200, 100, 200]); } catch (e) {} }
+      return;
+    }
+    render();
+  }, 1000);
+}
+function addTimerTime(sec) {
+  timerRemaining += sec;
+  timerTotal += sec;
+  const valEl = document.getElementById('timerFsVal');
+  const circle = document.getElementById('timerFsCircle');
+  const m = Math.floor(timerRemaining / 60), s = timerRemaining % 60;
+  valEl.textContent = m + ':' + String(s).padStart(2, '0');
+  circle.setAttribute('stroke-dashoffset', String(TIMER_FS_CIRC * (1 - timerRemaining / timerTotal)));
+}
+function closeTimerFs() { clearInterval(timerInterval); document.getElementById('timerFs').classList.remove('show'); }
+
+/* ---------------------------------------------------------------------- */
+/* TOAST                                                                    */
+/* ---------------------------------------------------------------------- */
+
+let toastTimer = null;
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2000);
+}
+/* ---------------------------------------------------------------------- */
+/* HELPERS                                                                  */
+/* ---------------------------------------------------------------------- */
+
+function getExByKey(dayKey, key) {
+  const d = DAYS[dayKey];
+  if (key.indexOf('.') >= 0) {
+    const [ci, ii] = key.split('.').map(Number);
+    return d.exercises[ci].items[ii];
+  }
+  return d.exercises[Number(key)];
+}
+
+function parseSetCount(setsStr) { const n = parseInt(setsStr, 10); return isNaN(n) ? 3 : n; }
+
+function weightMeta(ex) {
+  if (ex.weightLo != null && ex.weightHi != null) return weightRangeLabel(ex.weightLo, ex.weightHi, ex.unit);
+  return weightLabel(ex.weight, ex.unit);
+}
+
+/* ---------------------------------------------------------------------- */
+/* DAY TABS                                                                 */
+/* ---------------------------------------------------------------------- */
+
+function renderDayTabs() {
+  const el = document.getElementById('dayTabs');
+  el.innerHTML = DAY_ORDER.map(key => {
+    const d = DAYS[key];
+    const color = d.rest ? '' : `style="color:${d.color}"`;
+    return `<button class="day-tab" onclick="showDay('${key}')" id="tab-${key}">
+      <div class="tab-day" ${color}>${DAY_LABEL[key]}</div>
+      <div class="tab-type">${d.rest ? 'Отдых' : d.tabType}</div>
+    </button>`;
+  }).join('');
+}
+
+/* ---------------------------------------------------------------------- */
+/* HOME ABS                                                                 */
+/* ---------------------------------------------------------------------- */
 
 function renderHomeAbs() {
-  const exHtml = HOME_ABS.exercises.map((ex, i) => `
+  const rows = HOME_ABS.exercises.map((ex, i) => `
     <div class="abs-ex-row">
-      <div class="aname">${i+1}. ${ex.name}</div>
+      <div class="aname">${i + 1}. ${ex.name}</div>
       <div class="ameta">${ex.sets} · ${ex.muscles}</div>
       <div class="ahow">${ex.how}</div>
     </div>`).join('');
-
   return `
     <div class="home-abs-card" id="homeAbsCard" onclick="toggleHomeAbs()">
       <div class="home-abs-head">
         <div class="icon">🏠</div>
-        <div>
-          <div class="title">${HOME_ABS.title}</div>
-          <div class="sub">${HOME_ABS.sub}</div>
-        </div>
+        <div><div class="title">${HOME_ABS.title}</div><div class="sub">${HOME_ABS.sub}</div></div>
         <div class="chev">▾</div>
       </div>
-      <div class="home-abs-body">${exHtml}</div>
+      <div class="home-abs-body">${rows}</div>
     </div>`;
 }
+function toggleHomeAbs() { document.getElementById('homeAbsCard').classList.toggle('open'); }
 
-function toggleHomeAbs() {
-  document.getElementById('homeAbsCard').classList.toggle('open');
+/* ---------------------------------------------------------------------- */
+/* EXERCISE CARD PARTS                                                      */
+/* ---------------------------------------------------------------------- */
+
+function renderMuscleBars(muscles, color) {
+  return muscles.map(([name, pct]) => `
+    <div class="muscle-row">
+      <div class="muscle-name">${name}</div>
+      <div class="muscle-track"><div class="muscle-fill" style="width:${pct}%;background:${color}"></div></div>
+      <div class="muscle-pct">${pct}%</div>
+    </div>`).join('');
 }
 
-function renderVariants(dayKey, exIdx, variants, color) {
-  if (!variants) return '';
-  const pillsHtml = variants.options.map((opt, vi) => `
-    <button class="variant-pill ${vi===0?'active':''}" id="pill-${dayKey}-${exIdx}-${vi}"
-      style="${vi===0?`background:${color};`:''}"
-      onclick="selectVariant('${dayKey}',${exIdx},${vi})">${opt.name.split(':').pop().trim()}</button>
-  `).join('');
-
-  const detailHtml = variants.options.map((opt, vi) => `
-    <div class="variant-detail" id="detail-${dayKey}-${exIdx}-${vi}" style="${vi===0?'':'display:none'}">
-      <div class="variant-weight-row">
-        <span class="variant-weight" style="color:${color}">${opt.weight}</span>
-        <span class="variant-weight-unit">${opt.unit}</span>
-        <span class="variant-reps">${opt.reps}</span>
-      </div>
+function renderVariants(dayKey, key, altVariants, color) {
+  if (!altVariants || !altVariants.length) return '';
+  const pills = altVariants.map((opt, vi) => `
+    <button class="variant-pill ${vi === 0 ? 'active' : ''}" id="vpill-${dayKey}-${key}-${vi}"
+      style="${vi === 0 ? `background:${color};` : ''}"
+      onclick="selectVariant('${dayKey}','${key}',${vi},'${color}')">${opt.name}</button>`).join('');
+  const details = altVariants.map((opt, vi) => `
+    <div class="variant-detail" id="vdetail-${dayKey}-${key}-${vi}" style="${vi === 0 ? '' : 'display:none'}">
+      <span class="variant-weight" style="color:${color}">${weightLabel(opt.weight, opt.unit)}</span>
       <p class="variant-note">${opt.note}</p>
-      ${opt.calc ? `<div class="variant-calc">📐 ${opt.calc}</div>` : ''}
-    </div>
-  `).join('');
+    </div>`).join('');
+  return `<div class="variant-switcher">
+    <div class="variant-label">🔁 Замена</div>
+    <div class="variant-pills">${pills}</div>
+    ${details}
+  </div>`;
+}
 
+function renderDropset(d) {
+  if (!d) return '';
+  return `<div class="drop-block"><div class="db-title">📉 Дроп-сет</div><p>${d.note}</p></div>`;
+}
+function renderRestpause(r) {
+  if (!r) return '';
+  return `<div class="pause-block"><div class="pb-title">⏸ Rest-pause</div><p>${r.note}</p></div>`;
+}
+
+function renderNotesBlock(dayKey, key) {
   return `
-    <div class="variant-switcher">
-      <div class="variant-switcher-label"><span class="vs-icon">${variants.icon||'🔁'}</span>${variants.label}</div>
-      <div class="variant-pills">${pillsHtml}</div>
-      ${detailHtml}
+    <div class="notes-wrap">
+      <div class="variant-label">📝 Заметки</div>
+      <textarea class="notes-input" id="notes-${dayKey}-${key}" placeholder="Настройки сиденья, ощущения, заметки..." oninput="onNoteInput('${dayKey}','${key}',this.value)"></textarea>
+      <div class="notes-saved" id="saved-${dayKey}-${key}"></div>
     </div>`;
 }
 
-function selectVariant(dayKey, exIdx, variantIdx) {
-  const d = DAYS[dayKey];
-  const variants = d.exercises[exIdx].variants;
-  variants.options.forEach((opt, vi) => {
-    const pill = document.getElementById(`pill-${dayKey}-${exIdx}-${vi}`);
-    const detail = document.getElementById(`detail-${dayKey}-${exIdx}-${vi}`);
-    if (vi === variantIdx) {
-      pill.classList.add('active');
-      pill.style.background = d.color;
-      detail.style.display = 'block';
-    } else {
-      pill.classList.remove('active');
-      pill.style.background = '';
-      detail.style.display = 'none';
-    }
-  });
+function renderTimerBtn(dayKey, key, ex, rest, color) {
+  const m = Math.floor(rest / 60), s = rest % 60;
+  const label = m + ':' + String(s).padStart(2, '0');
+  return `<button class="timer-btn" onclick="startTimer(${rest}, '${ex.name.replace(/'/g, "\\'")}')"><span class="ti">⏱</span> Таймер отдыха · ${label}</button>`;
 }
 
-function renderDay(key) {
-  const d = DAYS[key];
+/* Full inner body of one exercise (used both standalone and inside a combo item) */
+function renderExerciseInner(dayKey, key, ex, color, rest) {
+  return `
+    <div class="info-block"><div class="info-block-title">Мышцы</div>${renderMuscleBars(ex.muscles, color)}</div>
+    <div class="info-block" style="background:${color}0d;border:1px solid ${color}22">
+      <div class="info-block-title" style="color:${color}99">Как делать</div><p>${ex.how}</p>
+    </div>
+    <div class="info-block"><div class="info-block-title">Темп</div><p style="color:${color}">${ex.tempo}</p></div>
+    <div class="info-block"><div class="info-block-title">Прогрессия</div><p>${ex.progression}</p></div>
+    ${renderDropset(ex.dropset)}
+    ${renderRestpause(ex.restpause)}
+    ${renderVariants(dayKey, key, ex.altVariants, color)}
+    ${renderTimerBtn(dayKey, key, ex, rest, color)}
+    ${renderNotesBlock(dayKey, key)}`;
+}
+
+/* ---------------------------------------------------------------------- */
+/* DAY RENDER                                                               */
+/* ---------------------------------------------------------------------- */
+
+function renderDay(dayKey) {
+  const d = DAYS[dayKey];
   const el = document.getElementById('dayContent');
 
   if (d.rest) {
     const tipsHtml = d.tips.map(t => `
       <div class="tip-card" style="border-color:${t.color}">
-        <h4 style="color:${t.color === '#3a3a4a' ? 'var(--muted)' : t.color}">${t.title}</h4>
+        <h4 style="color:${t.color === '#3a3a44' ? 'var(--muted)' : t.color}">${t.title}</h4>
         <p>${t.text}</p>
       </div>`).join('');
-
-    const checkHtml = d.checklist.map(c => `<li>${c}</li>`).join('');
-
+    const checkHtml = d.checklist.map(c => `<li style="font-size:11.5px;color:var(--muted);line-height:1.8;padding-left:16px;position:relative;list-style:none"><span style="position:absolute;left:0;color:var(--fri)">✓</span>${c}</li>`).join('');
     const nutHtml = d.nutrition ? `
       <div class="nutrition-box">
         <div class="nut-title">Питание сегодня</div>
@@ -883,115 +910,83 @@ function renderDay(key) {
           <div class="nut-item"><div class="nut-val">${d.nutrition.fat}</div><div class="nut-label">жиры</div></div>
         </div>
       </div>` : '';
-
-    const homeAbsHtml = d.homeAbs ? renderHomeAbs() : '';
-
     el.innerHTML = `
       <div class="rest-hero">
-        <div class="r-icon">${d.restType === 'full' ? '🛌' : '🧘'}</div>
-        <h3>${d.title}</h3>
-        <p>${d.subtitle}</p>
+        <div class="r-icon">🛌</div><h3>${d.title}</h3><p>${d.subtitle}</p>
       </div>
       <div class="section-title">Сегодня</div>
-      <div class="warmup-card">
-        <ul class="checklist">${checkHtml}</ul>
-        ${nutHtml}
-        ${homeAbsHtml}
-      </div>
+      <div class="tip-card" style="border-color:var(--rest)"><ul style="padding-left:0;margin:0">${checkHtml}</ul>${nutHtml}${d.homeAbs ? renderHomeAbs() : ''}</div>
       ${tipsHtml}`;
     return;
   }
 
-  const prioHtml = d.priority ? `
-    <div class="priority-bar">
-      <span class="priority-label">Акцент</span>
-      ${d.priority.map(([n,c]) => `<span class="priority-tag" style="background:${c}22;color:${c}">${n}</span>`).join('')}
-    </div>` : '';
+  const cardsHtml = d.exercises.map((card, i) => {
+    if (card.combo) {
+      const itemsHtml = card.items.map((it, j, arr) => {
+        const key = `${i}.${j}`;
+        return `
+          <div class="ex-card combo-item" id="ex-${dayKey}-${i}-${j}">
+            <div class="ex-header" onclick="toggleExN('${dayKey}',${i},${j})">
+              <div class="ex-num" id="num-${dayKey}-${i}-${j}">${j === 0 ? 'А' : 'Б'}</div>
+              <div class="ex-info">
+                <div class="ex-name">${it.name.replace(/^[АБ]\.\s*/, '')}</div>
+                <div class="ex-weight"><b>${it.sets || card.rounds}×${it.reps}</b> · ${weightMeta(it)}</div>
+              </div>
+              <div class="ex-chevron">▾</div>
+            </div>
+            <div class="ex-body">${renderExerciseInner(dayKey, key, it, d.color, card.restBetweenRounds)}</div>
+          </div>${j < arr.length - 1 ? '<div class="combo-arrow">⬇ без отдыха</div>' : ''}`;
+      }).join('');
+      return `
+        <div class="combo-wrap" style="border-color:${d.color}55">
+          <span class="combo-label" style="background:${d.color}22;color:${d.color}">🔗 ${card.label} · ${card.rounds} раунда</span>
+          <div class="combo-meta">${card.note}</div>
+          ${itemsHtml}
+        </div>`;
+    }
 
-  const warmupHtml = d.warmup.map(w => `<div class="wu-row">→ ${w}</div>`).join('');
-
-  const exHtml = d.exercises.map((ex, i) => {
-    const musHtml = ex.muscles.map(([name, pct]) => `
-      <div class="muscle-row">
-        <div class="muscle-name">${name}</div>
-        <div class="muscle-track"><div class="muscle-fill" style="width:${pct}%;background:${d.color}"></div></div>
-        <div class="muscle-pct">${pct}%</div>
-      </div>`).join('');
-
+    const ex = card;
+    const key = `${i}`;
     const tagHtml = ex.tag ? `<span class="tag" style="background:${d.color}22;color:${d.color}">${ex.tag}</span>` : '';
-    const altHtml = ex.alt ? `<div class="alt-text">Замена: <span>${ex.alt}</span></div>` : '';
-    const varHtml = ex.variability && ex.variability.length ? `
-      <div class="var-block">
-        <div class="info-block-title">Вариативность / прогрессия</div>
-        ${ex.variability.map(v => `<div class="var-row">→ ${v}</div>`).join('')}
-      </div>` : '';
-    const variantsHtml = renderVariants(key, i, ex.variants, d.color);
-
     return `
-      <div class="ex-card" id="ex-${key}-${i}">
-        <div class="ex-header" onclick="toggleEx('${key}',${i})">
-          <div class="ex-num" id="num-${key}-${i}">${i+1}</div>
+      <div class="ex-card" id="ex-${dayKey}-${i}">
+        <div class="ex-header" onclick="toggleEx('${dayKey}',${i})">
+          <div class="ex-num" id="num-${dayKey}-${i}">${i + 1}</div>
           <div class="ex-info">
             <div class="ex-name">${ex.name} ${tagHtml}</div>
-            <div class="ex-meta"><b>${ex.sets}</b> · ${ex.weight}</div>
+            <div class="ex-weight"><b>${ex.sets}×${ex.reps}</b> · ${weightMeta(ex)}</div>
           </div>
           <div class="ex-chevron">▾</div>
         </div>
-        <div class="ex-body">
-          <div class="rest-badge"><span class="rest-badge-dot"></span>Отдых: ${ex.rest}</div>
-          <div class="info-block">
-            <div class="info-block-title">Мышцы</div>
-            ${musHtml}
-          </div>
-          <div class="info-block" style="background:${d.color}0d;border:1px solid ${d.color}22">
-            <div class="info-block-title" style="color:${d.color}99">Как делать</div>
-            <p>${ex.how}</p>
-          </div>
-          <div class="info-block">
-            <div class="info-block-title">Темп</div>
-            <p style="color:${d.color};font-size:12px;line-height:1.7">${ex.tempo}</p>
-          </div>
-          <div class="info-block">
-            <div class="info-block-title">Зачем</div>
-            <p>${ex.why}</p>
-          </div>
-          ${variantsHtml}
-          ${varHtml}
-          ${altHtml}
-        </div>
+        <div class="ex-body">${renderExerciseInner(dayKey, key, ex, d.color, ex.rest)}</div>
       </div>`;
   }).join('');
 
   el.innerHTML = `
-    ${prioHtml}
     <div class="day-banner" style="background:${d.color}0d;border-color:${d.color};color:${d.color}">
       <h2 style="color:${d.color}">${d.title}</h2>
-      <div class="b-mode">⚙️ ${d.mode} · ⏱ ${d.time}</div>
-      <div class="b-tip">💡 ${d.tip}</div>
+      <div class="b-mode">⚙️ ${d.mode}</div>
     </div>
-    <div class="section-title">Разминка</div>
-    <div class="warmup-card">
-      <div class="wu-label">Обязательно перед работой</div>
-      ${warmupHtml}
-    </div>
-    <div class="section-title">Упражнения</div>
-    ${exHtml}`;
+    ${cardsHtml}`;
+
+  hydrateNotes(dayKey);
 }
 
+function toggleEx(dayKey, i) { document.getElementById(`ex-${dayKey}-${i}`).classList.toggle('open'); }
+function toggleExN(dayKey, i, j) { document.getElementById(`ex-${dayKey}-${i}-${j}`).classList.toggle('open'); }
+
+let currentDay = 'mon';
 function showDay(key) {
+  currentDay = key;
   document.querySelectorAll('.day-tab').forEach(t => t.classList.remove('active'));
   document.getElementById('tab-' + key).classList.add('active');
   renderDay(key);
-  document.getElementById('dayContent').scrollIntoView({behavior:'smooth', block:'start'});
+  document.getElementById('dayContent').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-function toggleEx(day, i) {
-  const card = document.getElementById(`ex-${day}-${i}`);
-  const num = document.getElementById(`num-${day}-${i}`);
-  const open = card.classList.toggle('open');
-  num.style.background = open ? DAYS[day].color : '';
-  num.style.color = open ? '#000' : '';
-}
+/* ---------------------------------------------------------------------- */
+/* NAV / INIT                                                               */
+/* ---------------------------------------------------------------------- */
 
 function showScreen(name) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
@@ -999,9 +994,20 @@ function showScreen(name) {
   document.getElementById('screen-' + name).classList.add('active');
   document.getElementById('nav-' + name).classList.add('active');
   window.scrollTo(0, 0);
+  if (name === 'rules') renderRules();
 }
 
-renderDay('mon');
+async function initApp() {
+  await loadKeyIndex();
+  await loadSettings();
+  document.getElementById('unit-kg').classList.toggle('active', STATE.units === 'kg');
+  document.getElementById('unit-lb').classList.toggle('active', STATE.units === 'lb');
+  renderDayTabs();
+  document.getElementById('tab-mon').classList.add('active');
+  renderDay('mon');
+}
+initApp();
+
 </script>
 </body>
 </html>
