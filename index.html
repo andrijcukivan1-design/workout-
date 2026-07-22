@@ -99,8 +99,29 @@ button,input,textarea,select{font-family:inherit;color:inherit}
 .pause-block .pb-title{font-size:8.5px;letter-spacing:2px;color:var(--pause);text-transform:uppercase;font-weight:700;margin-bottom:5px}
 .pause-block p{font-size:12px;color:#ffcfa3;line-height:1.65}
 
+/* COLLAPSIBLE MINI SECTION (Прогрессия / Замена) */
+.mini-toggle{display:flex;align-items:center;justify-content:space-between;margin-top:9px;padding:9px 12px;background:var(--card2);border-radius:10px;cursor:pointer;border:1px solid var(--border)}
+.mini-toggle .mt-label{font-size:11px;font-weight:600;color:var(--muted);display:flex;align-items:center;gap:6px}
+.mini-toggle .mt-chev{font-size:11px;color:var(--muted2);transition:transform .2s}
+.mini-toggle.open .mt-chev{transform:rotate(180deg)}
+.mini-body{display:none;margin-top:6px}
+.mini-toggle.open + .mini-body{display:block;animation:fadeIn .15s ease}
+
+/* WEIGHT SLIDER */
+.weight-block{background:var(--card2);border:1px solid var(--border2);border-radius:12px;padding:12px 13px;margin-top:9px}
+.weight-block-title{font-size:8.5px;letter-spacing:2px;color:var(--muted2);text-transform:uppercase;margin-bottom:8px;font-weight:700}
+.weight-value-row{display:flex;align-items:baseline;justify-content:center;gap:6px;margin-bottom:10px}
+.weight-value{font-family:'Bebas Neue',sans-serif;font-size:34px;letter-spacing:1px}
+.weight-unit{font-size:12px;color:var(--muted)}
+.weight-slider-row{display:flex;align-items:center;gap:8px}
+.weight-step-btn{width:34px;height:34px;border-radius:9px;background:var(--card3);border:1px solid var(--border2);color:var(--text);font-size:16px;font-weight:700;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.weight-slider{-webkit-appearance:none;appearance:none;flex:1;height:5px;border-radius:3px;background:var(--border2);outline:none}
+.weight-slider::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--text);cursor:pointer;border:3px solid var(--card2)}
+.weight-slider::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--text);cursor:pointer;border:3px solid var(--card2)}
+.weight-reset{text-align:center;font-size:10px;color:var(--muted2);margin-top:8px;text-decoration:underline;cursor:pointer}
+
 /* VARIANT SWITCHER */
-.variant-switcher{margin-top:9px}
+.variant-switcher{margin-top:0}
 .variant-label{font-size:8.5px;letter-spacing:2px;color:var(--muted2);text-transform:uppercase;margin-bottom:7px;font-weight:700}
 .variant-pills{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
 .variant-pills::-webkit-scrollbar{display:none}
@@ -110,12 +131,13 @@ button,input,textarea,select{font-family:inherit;color:inherit}
 .variant-weight{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:1px}
 .variant-note{font-size:11px;color:var(--dim);line-height:1.65;margin-top:5px}
 
-/* TIMER BUTTON */
-.timer-btn{width:100%;margin-top:9px;background:var(--card2);border:1px solid var(--border2);border-radius:10px;padding:11px;font-size:12px;font-weight:700;color:var(--text);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px}
-.timer-btn .ti{font-size:14px}
+.timer-btn{width:100%;margin-top:11px;background:var(--card3);border:2px solid var(--border2);border-radius:12px;padding:14px;font-size:13.5px;font-weight:800;color:var(--text);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;letter-spacing:.3px}
+.timer-btn .ti{font-size:17px}
+.timer-btn:active{transform:scale(.98)}
 
 /* NOTES */
-.notes-wrap{margin-top:9px}
+.notes-wrap{margin-top:11px;background:var(--card2);border:1px solid var(--border2);border-radius:12px;padding:11px 12px}
+.notes-block-title{font-size:9px;letter-spacing:2px;color:var(--gold,#e9b93e);text-transform:uppercase;margin-bottom:7px;font-weight:800;display:flex;align-items:center;gap:5px}
 .notes-input{width:100%;background:var(--card2);border:1px solid var(--border2);border-radius:10px;padding:10px 11px;font-size:12px;color:var(--text);resize:none;min-height:44px}
 .notes-input::placeholder{color:var(--muted2)}
 .notes-saved{font-size:9.5px;color:var(--muted2);margin-top:4px;height:12px}
@@ -316,13 +338,6 @@ const DAYS = {
         how: 'Наклон корпуса вперёд ~30° — переносит нагрузку с трицепса на грудь. Вниз до параллели предплечий с полом.',
         tempo: 'Вниз 2–3 сек → вверх взрывно',
         progression: '3×8 чисто → +2.5 кг.'
-      },
-      {
-        name: 'Жим гантелей сидя', weight: 25, unit: 'кг/рука', weightLo: 22, weightHi: 28, sets: '2', reps: '8–10', rest: 90, tag: null,
-        muscles: [['Передняя дельта', 50], ['Средняя дельта', 35], ['Трицепс', 15]],
-        how: 'Спина прямая, локти чуть впереди корпуса. Опускаешь до уровня ушей, не ниже.',
-        tempo: 'Вниз 2–3 сек → вверх контролируемо',
-        progression: 'Диапазон 22–28 кг — расти по 2 кг, когда 8–10 повторов даются легко на обоих подходах.'
       }
     ]
   },
@@ -520,6 +535,13 @@ const DAYS = {
         how: 'До линии тела без переразгибания, пауза 1 сек вверху.',
         tempo: 'Вверх → пауза 1 сек → вниз медленно',
         progression: 'Без веса, если поясница устала после пятницы.'
+      },
+      {
+        name: 'Жим гантелей сидя', weight: 26, weightLo: 22, weightHi: 30, unit: 'кг/рука', sets: '2', reps: '8', rest: 90, tag: null,
+        muscles: [['Передняя дельта', 50], ['Средняя дельта', 35], ['Трицепс', 15]],
+        how: 'Спина прямая, локти чуть впереди корпуса. Опускаешь до уровня ушей, не ниже. Перенесено сюда с понедельника — там не хватало времени.',
+        tempo: 'Вниз 2–3 сек → вверх контролируемо',
+        progression: 'Подбери ползунком вес, на котором 8-й повтор ощутимо тяжёлый (RIR 1–2). Когда оба подхода по 8 даются легко — сдвинь ползунок на +2 кг.'
       }
     ]
   },
@@ -632,6 +654,7 @@ async function storGet(key) {
   try { const r = await window.storage.get(key, false); return r ? JSON.parse(r.value) : null; }
   catch (e) { return null; }
 }
+async function storDelete(key) { try { await window.storage.delete(key, false); } catch (e) {} }
 
 /* ---------------------------------------------------------------------- */
 /* SETTINGS (units)                                                         */
@@ -649,6 +672,90 @@ function setUnits(u) {
   document.getElementById('unit-lb').classList.toggle('active', u === 'lb');
   saveSettings();
   if (document.getElementById('screen-workout').classList.contains('active')) renderDay(currentDay);
+}
+
+/* ---------------------------------------------------------------------- */
+/* WEIGHT SLIDER (persisted per-exercise "current working weight")         */
+/* ---------------------------------------------------------------------- */
+
+STATE.weightOverrides = {}; // "dayKey|key" -> number (kg, always stored in kg)
+
+function weightKey(dayKey, key) { return dayKey + '|' + key; }
+
+function getCurrentWeight(dayKey, key, ex) {
+  const k = weightKey(dayKey, key);
+  return STATE.weightOverrides[k] != null ? STATE.weightOverrides[k] : ex.weight;
+}
+
+function displayWeightNumber(kgVal) {
+  return STATE.units === 'lb' ? Math.round(kgVal * KG_TO_LB) : kgVal;
+}
+
+async function hydrateWeights(dayKey) {
+  const prefix = `weight:${dayKey}:`;
+  for (const k of STATE.keyIndex) {
+    if (k.indexOf(prefix) !== 0) continue;
+    const key = k.slice(prefix.length);
+    if (STATE.weightOverrides[weightKey(dayKey, key)] != null) continue; // already cached this session
+    const val = await storGet(k);
+    if (val == null) continue;
+    STATE.weightOverrides[weightKey(dayKey, key)] = val;
+    applyWeightToDom(dayKey, key, val);
+  }
+}
+
+function applyWeightToDom(dayKey, key, val) {
+  const slider = document.getElementById(`weight-slider-${dayKey}-${key}`);
+  if (slider) slider.value = val;
+  const valEl = document.getElementById(`weight-val-${dayKey}-${key}`);
+  if (valEl) valEl.textContent = displayWeightNumber(val);
+  const ex = getExByKey(dayKey, key);
+  const metaEl = document.getElementById(`metaw-${dayKey}-${key}`);
+  if (metaEl && ex) metaEl.textContent = weightLabel(val, ex.unit);
+  const resetEl = document.getElementById(`weight-reset-${dayKey}-${key}`);
+  if (resetEl) resetEl.style.display = '';
+}
+
+function onWeightInput(dayKey, key, val) {
+  const valEl = document.getElementById(`weight-val-${dayKey}-${key}`);
+  if (valEl) valEl.textContent = displayWeightNumber(parseFloat(val));
+}
+
+async function onWeightChange(dayKey, key, val) {
+  const num = parseFloat(val);
+  STATE.weightOverrides[weightKey(dayKey, key)] = num;
+  await storSet(`weight:${dayKey}:${key}`, num);
+  const ex = getExByKey(dayKey, key);
+  const metaEl = document.getElementById(`metaw-${dayKey}-${key}`);
+  if (metaEl) metaEl.textContent = weightLabel(num, ex.unit);
+  const resetEl = document.getElementById(`weight-reset-${dayKey}-${key}`);
+  if (resetEl) resetEl.style.display = '';
+  toast('Вес обновлён: ' + weightLabel(num, ex.unit));
+}
+
+function stepWeight(dayKey, key, dir) {
+  const slider = document.getElementById(`weight-slider-${dayKey}-${key}`);
+  if (!slider) return;
+  let val = parseFloat(slider.value) + dir * 2.5;
+  val = Math.max(parseFloat(slider.min), Math.min(parseFloat(slider.max), val));
+  slider.value = val;
+  onWeightInput(dayKey, key, val);
+  onWeightChange(dayKey, key, val);
+}
+
+async function resetWeight(dayKey, key) {
+  const ex = getExByKey(dayKey, key);
+  delete STATE.weightOverrides[weightKey(dayKey, key)];
+  await storDelete(`weight:${dayKey}:${key}`);
+  const slider = document.getElementById(`weight-slider-${dayKey}-${key}`);
+  if (slider) slider.value = ex.weight;
+  const valEl = document.getElementById(`weight-val-${dayKey}-${key}`);
+  if (valEl) valEl.textContent = displayWeightNumber(ex.weight);
+  const metaEl = document.getElementById(`metaw-${dayKey}-${key}`);
+  if (metaEl) metaEl.textContent = weightLabel(ex.weight, ex.unit);
+  const resetEl = document.getElementById(`weight-reset-${dayKey}-${key}`);
+  if (resetEl) resetEl.style.display = 'none';
+  toast('Вес сброшен к дефолту');
 }
 
 /* ---------------------------------------------------------------------- */
@@ -770,11 +877,6 @@ function getExByKey(dayKey, key) {
 
 function parseSetCount(setsStr) { const n = parseInt(setsStr, 10); return isNaN(n) ? 3 : n; }
 
-function weightMeta(ex) {
-  if (ex.weightLo != null && ex.weightHi != null) return weightRangeLabel(ex.weightLo, ex.weightHi, ex.unit);
-  return weightLabel(ex.weight, ex.unit);
-}
-
 /* ---------------------------------------------------------------------- */
 /* DAY TABS                                                                 */
 /* ---------------------------------------------------------------------- */
@@ -827,6 +929,39 @@ function renderMuscleBars(muscles, color) {
     </div>`).join('');
 }
 
+function renderMiniToggle(idSuffix, label, innerHtml) {
+  return `
+    <div class="mini-toggle" id="mt-${idSuffix}" onclick="toggleMini('${idSuffix}')">
+      <span class="mt-label">${label}</span><span class="mt-chev">▾</span>
+    </div>
+    <div class="mini-body" id="mb-${idSuffix}">${innerHtml}</div>`;
+}
+function toggleMini(idSuffix) { document.getElementById(`mt-${idSuffix}`).classList.toggle('open'); }
+
+function renderWeightSlider(dayKey, key, ex, color) {
+  if (ex.weight == null) return ''; // bodyweight-only exercise, nothing to slide
+  const cur = getCurrentWeight(dayKey, key, ex);
+  const lo = ex.weightLo != null ? ex.weightLo : Math.max(0, ex.weight - 20);
+  const hi = ex.weightHi != null ? ex.weightHi : ex.weight + 40;
+  const min = Math.max(0, lo - 10);
+  const max = hi + 20;
+  const unitLabel = STATE.units === 'lb' ? 'lb' : 'кг';
+  const suffix = (ex.unit || '').replace(/^кг/, '');
+  const hasOverride = STATE.weightOverrides[weightKey(dayKey, key)] != null;
+  return `
+    <div class="weight-block">
+      <div class="weight-block-title">Вес</div>
+      <div class="weight-value-row">
+        <button class="weight-step-btn" onclick="stepWeight('${dayKey}','${key}',-1)">−</button>
+        <span class="weight-value" id="weight-val-${dayKey}-${key}" style="color:${color}">${displayWeightNumber(cur)}</span><span class="weight-unit">${unitLabel}${suffix}</span>
+        <button class="weight-step-btn" onclick="stepWeight('${dayKey}','${key}',1)">+</button>
+      </div>
+      <input type="range" class="weight-slider" id="weight-slider-${dayKey}-${key}" min="${min}" max="${max}" step="2.5" value="${cur}"
+        oninput="onWeightInput('${dayKey}','${key}',this.value)" onchange="onWeightChange('${dayKey}','${key}',this.value)">
+      <div class="weight-reset" id="weight-reset-${dayKey}-${key}" style="${hasOverride ? '' : 'display:none'}" onclick="resetWeight('${dayKey}','${key}')">Сбросить к ${weightLabel(ex.weight, ex.unit)}</div>
+    </div>`;
+}
+
 function renderVariants(dayKey, key, altVariants, color) {
   if (!altVariants || !altVariants.length) return '';
   const pills = altVariants.map((opt, vi) => `
@@ -839,7 +974,6 @@ function renderVariants(dayKey, key, altVariants, color) {
       <p class="variant-note">${opt.note}</p>
     </div>`).join('');
   return `<div class="variant-switcher">
-    <div class="variant-label">🔁 Замена</div>
     <div class="variant-pills">${pills}</div>
     ${details}
   </div>`;
@@ -857,7 +991,7 @@ function renderRestpause(r) {
 function renderNotesBlock(dayKey, key) {
   return `
     <div class="notes-wrap">
-      <div class="variant-label">📝 Заметки</div>
+      <div class="notes-block-title">📝 Заметки</div>
       <textarea class="notes-input" id="notes-${dayKey}-${key}" placeholder="Настройки сиденья, ощущения, заметки..." oninput="onNoteInput('${dayKey}','${key}',this.value)"></textarea>
       <div class="notes-saved" id="saved-${dayKey}-${key}"></div>
     </div>`;
@@ -866,21 +1000,24 @@ function renderNotesBlock(dayKey, key) {
 function renderTimerBtn(dayKey, key, ex, rest, color) {
   const m = Math.floor(rest / 60), s = rest % 60;
   const label = m + ':' + String(s).padStart(2, '0');
-  return `<button class="timer-btn" onclick="startTimer(${rest}, '${ex.name.replace(/'/g, "\\'")}')"><span class="ti">⏱</span> Таймер отдыха · ${label}</button>`;
+  return `<button class="timer-btn" style="border-color:${color}55" onclick="startTimer(${rest}, '${ex.name.replace(/'/g, "\\'")}')"><span class="ti">⏱</span> Таймер отдыха · ${label}</button>`;
 }
 
 /* Full inner body of one exercise (used both standalone and inside a combo item) */
 function renderExerciseInner(dayKey, key, ex, color, rest) {
+  const progId = `prog-${dayKey}-${key}`;
+  const altId = `alt-${dayKey}-${key}`;
   return `
     <div class="info-block"><div class="info-block-title">Мышцы</div>${renderMuscleBars(ex.muscles, color)}</div>
     <div class="info-block" style="background:${color}0d;border:1px solid ${color}22">
       <div class="info-block-title" style="color:${color}99">Как делать</div><p>${ex.how}</p>
     </div>
     <div class="info-block"><div class="info-block-title">Темп</div><p style="color:${color}">${ex.tempo}</p></div>
-    <div class="info-block"><div class="info-block-title">Прогрессия</div><p>${ex.progression}</p></div>
+    ${renderWeightSlider(dayKey, key, ex, color)}
+    ${renderMiniToggle(progId, '📈 Прогрессия', `<p style="font-size:12px;color:var(--dim);line-height:1.7;padding:0 2px">${ex.progression}</p>`)}
     ${renderDropset(ex.dropset)}
     ${renderRestpause(ex.restpause)}
-    ${renderVariants(dayKey, key, ex.altVariants, color)}
+    ${ex.altVariants ? renderMiniToggle(altId, '🔁 Замена', renderVariants(dayKey, key, ex.altVariants, color)) : ''}
     ${renderTimerBtn(dayKey, key, ex, rest, color)}
     ${renderNotesBlock(dayKey, key)}`;
 }
@@ -924,13 +1061,14 @@ function renderDay(dayKey) {
     if (card.combo) {
       const itemsHtml = card.items.map((it, j, arr) => {
         const key = `${i}.${j}`;
+        const setsLabel = `${it.sets || card.rounds}×${it.reps}`;
         return `
           <div class="ex-card combo-item" id="ex-${dayKey}-${i}-${j}">
             <div class="ex-header" onclick="toggleExN('${dayKey}',${i},${j})">
               <div class="ex-num" id="num-${dayKey}-${i}-${j}">${j === 0 ? 'А' : 'Б'}</div>
               <div class="ex-info">
                 <div class="ex-name">${it.name.replace(/^[АБ]\.\s*/, '')}</div>
-                <div class="ex-weight"><b>${it.sets || card.rounds}×${it.reps}</b> · ${weightMeta(it)}</div>
+                <div class="ex-weight"><b>${setsLabel}</b> · <span id="metaw-${dayKey}-${key}">${weightLabel(getCurrentWeight(dayKey, key, it), it.unit)}</span></div>
               </div>
               <div class="ex-chevron">▾</div>
             </div>
@@ -954,7 +1092,7 @@ function renderDay(dayKey) {
           <div class="ex-num" id="num-${dayKey}-${i}">${i + 1}</div>
           <div class="ex-info">
             <div class="ex-name">${ex.name} ${tagHtml}</div>
-            <div class="ex-weight"><b>${ex.sets}×${ex.reps}</b> · ${weightMeta(ex)}</div>
+            <div class="ex-weight"><b>${ex.sets}×${ex.reps}</b> · <span id="metaw-${dayKey}-${key}">${weightLabel(getCurrentWeight(dayKey, key, ex), ex.unit)}</span></div>
           </div>
           <div class="ex-chevron">▾</div>
         </div>
@@ -970,6 +1108,7 @@ function renderDay(dayKey) {
     ${cardsHtml}`;
 
   hydrateNotes(dayKey);
+  hydrateWeights(dayKey);
 }
 
 function toggleEx(dayKey, i) { document.getElementById(`ex-${dayKey}-${i}`).classList.toggle('open'); }
